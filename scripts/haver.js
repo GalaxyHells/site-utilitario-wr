@@ -175,7 +175,8 @@ function renderizarLista() {
   });
   renderizarQuitados();
   salvarHaverLocal();
-  salvarHaverFirebase();
+  // Remova esta linha:
+  // salvarHaverFirebase();
 }
 
 // Modal simples para abater valor
@@ -200,7 +201,7 @@ window.abrirModalAbater = function(idx) {
     }
     renderizarLista();
     salvarHaverLocal();
-    salvarHaverFirebase();
+    salvarHaverFirebase(); // aqui pode!
   }
 };
 
@@ -220,7 +221,7 @@ window.abrirModalAdicionar = function(idx) {
     });
     renderizarLista();
     salvarHaverLocal();
-    salvarHaverFirebase();
+    salvarHaverFirebase(); // aqui pode!
   }
 };
 
@@ -229,7 +230,7 @@ window.removerHaver = function(idx) {
     listaHaver.splice(idx, 1);
     renderizarLista();
     salvarHaverLocal();
-    salvarHaverFirebase();
+    salvarHaverFirebase(); // aqui pode!
   }
 };
 
