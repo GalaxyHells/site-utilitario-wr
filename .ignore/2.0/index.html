@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ferramentas</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+
+
+</head>
+<body>
+  <div class="toolbar">
+    <button class="tab-button active" onclick="mostrarFerramenta('cobrar')">Cobrar</button>
+    <button class="tab-button" onclick="mostrarFerramenta('ferramenta2')">Ferramenta 2</button>
+    <button class="tab-button" onclick="mostrarFerramenta('ferramenta3')">Ferramenta 3</button>
+  </div>
+
+  <div id="cobrar" class="container ferramenta ativa">
+    <h2>Gerador de Mensagem Automática</h2>
+    <label for="quantidade">Quantidade de notas:</label>
+    <input type="number" id="quantidade" min="1" />
+
+    <label for="valor">Valor total (R$):</label>
+    <input type="number" id="valor" step="0.01" />
+
+    <button onclick="gerarMensagem()">Gerar Mensagem</button>
+
+    <label for="mensagem">Mensagem gerada:</label>
+    <textarea id="mensagem" readonly></textarea>
+    <button class="small-button" onclick="copiarMensagem()">Copiar mensagem</button>
+  </div>
+
+  <div id="ferramenta2" class="container ferramenta">
+    <h2>Ferramenta 2</h2>
+    <p>Em construção...</p>
+  </div>
+
+  <div id="ferramenta3" class="container ferramenta">
+    <h2>Ferramenta 3</h2>
+    <p>Em construção...</p>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

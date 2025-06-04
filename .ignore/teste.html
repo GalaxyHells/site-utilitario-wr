@@ -1,0 +1,50 @@
+<!-- Botão estilizado com ícone do WhatsApp -->
+<button id="enviarWhatsApp" class="whatsapp-button">
+    <span class="icon">📱</span>
+    Enviar no WhatsApp
+  </button>
+  
+  <style>
+    .whatsapp-button {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background-color: #25D366;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+  
+    .whatsapp-button:hover {
+      background-color: #1ebe5d;
+    }
+  
+    .whatsapp-button .icon {
+      font-size: 1.2rem;
+    }
+  </style>
+  
+  <script>
+    document.getElementById('enviarWhatsApp').addEventListener('click', () => {
+      const numero = '5581999999999'; // DDI + DDD + número
+      const mensagem = `
+  Olá! Segue abaixo o valor calculado da cerâmica:
+  
+  - Tipo: Porcelanato
+  - Área: 12 m²
+  - Quantidade de caixas: 8
+  - Argamassa necessária: 2 sacos
+  
+  Qualquer dúvida, fico à disposição.`;
+  
+      const url = `https://wa.me/${numero}?text=${encodeURIComponent(mensagem)}`;
+      window.open(url, '_blank');
+    });
+  </script>
+  

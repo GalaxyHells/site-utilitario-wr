@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../styles/styles-global.css" />
+    <link rel="stylesheet" href="../styles/styles-cobrar.css" />
+</head>
+
+<body>
+    
+    <h2>Gerador de Mensagem</h2>
+
+    <!-- Botão de resetar -->
+    <button id="resetarCobrar" class="small-button" style="position: absolute; top: 24px; right: 32px;">Resetar</button>
+
+    <label>Vencidas</label>
+    <div id="vencidas-lista"></div>
+    <button type="button" class="small-button" onclick="adicionarLinha('vencidas')">+ Adicionar vencida</button>
+
+    <label>Vencendo hoje</label>
+    <div id="hoje-lista"></div>
+    <button type="button" class="small-button" onclick="adicionarLinha('hoje')">+ Adicionar hoje</button>
+
+    <label>Vencendo nos próximos 7 dias</label>
+    <div id="sete-lista"></div>
+    <button type="button" class="small-button" onclick="adicionarLinha('sete')">+ Adicionar 7 dias</button>
+
+    <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+        <button type="button" class="small-button btn-pix clicado" data-chave="05.346.003.0001.03" onclick="setarPix('05.346.003.0001.03')">CNPJ</button>
+        <button type="button" class="small-button btn-pix" data-chave="xxx.xxx.xxx-xx" onclick="setarPix('025.914.498-30')">CPF</button>
+        <button type="button" class="small-button btn-pix" data-chave="goloni.goloni@hotmail.com" onclick="setarPix('goloni.goloni@hotmail.com')">Email</button>
+    </div>
+
+    <button onclick="gerarMensagem()">Gerar Mensagem</button>
+
+    <label for="mensagem">Mensagem gerada:</label>
+    <textarea id="mensagem" readonly></textarea>
+
+    <button class="small-button" onclick="copiarMensagem()">Copiar mensagem</button>
+
+</body>
+</html>
+

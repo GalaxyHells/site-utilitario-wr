@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gerador de Mensagem Automática</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 2rem;
+      background-color: #f2f2f2;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+    input, button, textarea {
+      width: 100%;
+      margin-top: 1rem;
+      padding: 0.5rem;
+      font-size: 1rem;
+    }
+    textarea {
+      height: 200px;
+    }
+    .small-button {
+      width: auto;
+      margin-top: 0.5rem;
+      float: right;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Gerador de Mensagem Automática</h2>
+    <label for="quantidade">Quantidade de notas:</label>
+    <input type="number" id="quantidade" min="1" />
+
+    <label for="valor">Valor total (R$):</label>
+    <input type="number" id="valor" step="0.01" />
+
+    <button onclick="gerarMensagem()">Gerar Mensagem</button>
+
+    <label for="mensagem">Mensagem gerada:</label>
+    <textarea id="mensagem" readonly></textarea>
+    <button class="small-button" onclick="copiarMensagem()">Copiar mensagem</button>
+  </div>
+
+  <script>
+    function gerarMensagem() {
+      const qtd = document.getElementById('quantidade').value;
+      const valorInput = document.getElementById('valor').value;
+      if (!qtd || !valorInput) {
+        alert('Preencha todos os campos.');
+        return;
+      }
+      const valor = parseFloat(valorInput).toFixed(2).replace('.', ',');
+      const mensagem = `Bom dia,\n\nO(a) senhor(a) tem ${qtd} nota(s) vencendo hoje, no valor de R$ ${valor}.\nCaso deseje, pode realizar o pagamento via Pix utilizando a chave: goloni.goloni@hotmail.com\n\nAtenciosamente,\nWR - Materiais para Construção\n\nEsta é uma mensagem automática. Em caso de dúvidas, entre em contato conosco.`;
+      document.getElementById('mensagem').value = mensagem;
+    }
+
+    function copiarMensagem() {
+      const mensagem = document.getElementById('mensagem');
+      mensagem.select();
+      mensagem.setSelectionRange(0, 99999); // Para dispositivos móveis
+      document.execCommand('copy');
+      alert('Mensagem copiada!');
+    }
+  </script>
+</body>
+</html>

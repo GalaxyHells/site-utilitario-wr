@@ -1,0 +1,40 @@
+/* Estilo para o grid do catálogo */
+.catalogo-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Valor inicial: 3 colunas */
+  gap: 1rem;
+  margin-top: 1rem;
+  padding: 10px 10px;
+}
+
+.catalogo-item {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.catalogo-item img {
+  width: 100%;
+  aspect-ratio: 1 / 1;      /* Mantém a imagem quadrada */
+  max-width: 100%;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+  /* border: rgba(0, 0, 0, 0.1) solid 1px;
+  border-radius: 12px */
+  object-fit: cover;
+}
+
+.catalogo-item h3 {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  margin-top: 0;
+}
+
+.catalogo-item p {
+  font-size: 0.9rem;
+  margin: 0.1rem 0;
+  color: #555;
+}

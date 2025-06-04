@@ -1,0 +1,168 @@
+/* styles/styles-listas-produtos.css */
+
+#ferramenta6.container.ferramenta {
+  max-width: 600px;
+  /* margin: 0 auto 2.5rem auto; */
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  padding: 2.2rem 1.5rem 2.5rem 1.5rem;
+}
+
+#listasProdutosContainer {
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+#btnNovaLista {
+  margin-bottom: 1.2rem;
+  background: #1a8917;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 18px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+#btnNovaLista:hover {
+  background: #156d13;
+}
+
+.lista-produto-card {
+  background: #f8f8fa;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  padding: 1rem;
+  margin-bottom: 1.2rem;
+  transition: box-shadow 0.2s;
+}
+.lista-produto-card:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+}
+
+.lista-produto-card strong {
+  font-size: 1.15rem;
+  color: #1a8917;
+}
+
+.lista-produto-card ul {
+  margin-top: 0.5rem;
+}
+
+.lista-produto-card li {
+  margin-bottom: 0.5rem;
+  padding: 0.3rem 0.2rem 0.3rem 0.5rem;
+  border-left: 3px solid #1a8917;
+  background: #fff;
+  border-radius: 4px;
+}
+
+.lista-produto-card span[style*="font-weight:500"] {
+  color: #222;
+}
+
+.lista-produto-card span[style*="color:#1a8917"] {
+  font-weight: 600;
+}
+
+.lista-produto-card span[style*="color:#555"] {
+  font-style: italic;
+}
+
+#modalEditarLista {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: rgba(0,0,0,0.35);
+  justify-content: center;
+  align-items: center;
+}
+#modalEditarLista[style*="display: flex"],
+#modalEditarLista.mostrar {
+  display: flex !important;
+}
+#modalEditarLista > div {
+  background: #fff;
+  border-radius: 10px;
+  max-width: 400px;
+  width: 100%;
+  padding: 1.5rem;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.18);
+  margin: 0 auto;
+  align-self: center;
+}
+
+@media (max-width: 600px) {
+  #modalEditarLista > div {
+    max-width: 98vw;
+    padding: 1rem;
+  }
+}
+#modalEditarLista input[type="text"] {
+  border: 1px solid #d1d5db;
+  border-radius: 5px;
+  padding: 6px 8px;
+  font-size: 1rem;
+  outline: none;
+  transition: border 0.2s;
+}
+#modalEditarLista input[type="text"]:focus {
+  border: 1.5px solid #1a8917;
+}
+#btnAdicionarItem {
+  margin-top: 0.7rem;
+  background: #e6f4ea;
+  color: #1a8917;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+#btnAdicionarItem:hover {
+  background: #c7e9d6;
+}
+#btnSalvarLista {
+  background: #1a8917;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 7px 18px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+#btnSalvarLista:hover {
+  background: #156d13;
+}
+#btnCancelarEdicao {
+  background: #eee;
+  color: #333;
+  border: none;
+  border-radius: 6px;
+  padding: 7px 18px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+#btnCancelarEdicao:hover {
+  background: #ddd;
+}
+
+/* Botão de lixeira nos itens */
+#itensLista button.small-button {
+  background: #fbe9e7;
+  color: #d32f2f;
+  border: none;
+  border-radius: 5px;
+  padding: 4px 10px;
+  font-size: 1.1em;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+#itensLista button.small-button:hover {
+  background: #ffccbc;
+}

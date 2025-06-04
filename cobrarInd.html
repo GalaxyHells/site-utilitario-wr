@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Exemplo Gerador de Mensagem de Cobrança</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 2rem; background: #f7f7f7; }
+    .nota { display: flex; gap: 1rem; margin-bottom: 0.5rem; }
+    .nota input[type="number"] { width: 80px; }
+    .nota input[type="date"] { width: 140px; }
+    button { padding: 0.5rem 1rem; margin-top: 1rem; }
+    textarea { width: 100%; height: 120px; margin-top: 1rem; }
+  </style>
+</head>
+<body>
+  <h2>Gerador de Mensagem de Cobrança</h2>
+  <div id="notas"></div>
+  <button onclick="adicionarNota()">Adicionar Nota</button>
+  <button onclick="gerarMensagem()">Gerar Mensagem</button>
+  <textarea id="mensagem" readonly placeholder="Mensagem gerada..."></textarea>
+
+  <script>
+    // Inicializa com uma nota
+    let notas = [{valor: '', vencimento: ''}];
+
+    function renderNotas() {
+      const container = document.getElementById('notas');
+      container.innerHTML = '';
+      notas.forEach((nota, i) => {
+        const div = document.createElement('div');
+        div.className = 'nota';
+        div.innerHTML = `
+          <label>Valor: <input type="number" min="0.01" step="0.01" value="${nota.valor}" onchange="atualizarNota(${i}, 'valor', this.value)"></label>
+          <label>Vencimento: <input type="date" value="${nota.vencimento}" onchange="atualizarNota(${i}, 'vencimento', this.value)"></label>
+          <button onclick="removerNota(${i})" ${notas.length === 1 ? 'disabled' : ''}>Remover</button>
+        `;
+        container.appendChild(div);
+      });
+    }
+
+    function atualizarNota(i, campo, valor) {
+      notas[i][campo] = valor;
+    }
+
+    function adicionarNota() {
+      notas.push({valor: '', vencimento: ''});
+      renderNotas();
+    }
+
+    function removerNota(i) {
+      notas.splice(i, 1);
+      renderNotas();
+    }
+
+    function classificarNotas() {
+      const hoje = new Date();
+      hoje.setHours(0,0,0,0);
+      const vencidas = [], vencendoHoje = [], aVencer = [];
+      notas.forEach(nota => {
+        if (!nota.valor || !nota.vencimento) return;
+        const dataVenc = new Date(nota.vencimento);
+        dataVenc.setHours(0,0,0,0);
+        if (dataVenc < hoje) {
+          vencidas.push(nota);
+        } else if (dataVenc.getTime() === hoje.getTime()) {
+          vencendoHoje.push(nota);
+        } else {
+          aVencer.push(nota);
+        }
+      });
+      return { vencidas, vencendoHoje, aVencer };
+    }
+
+    function gerarMensagem() {
+      const { vencidas, vencendoHoje, aVencer } = classificarNotas();
+      let msg = "Olá! Seguem as informações das suas notas:\n";
+      if (vencidas.length) {
+        msg += `- ${vencidas.length} nota(s) vencida(s): ` +
+          vencidas.map(n => `R$ ${parseFloat(n.valor).toFixed(2).replace('.', ',')} (venc. ${formatarData(n.vencimento)})`).join(', ') + '\n';
+      }
+      if (vencendoHoje.length) {
+        msg += `- ${vencendoHoje.length} nota(s) vence(m) hoje: ` +
+          vencendoHoje.map(n => `R$ ${parseFloat(n.valor).toFixed(2).replace('.', ',')} (venc. ${formatarData(n.vencimento)})`).join(', ') + '\n';
+      }
+      if (aVencer.length) {
+        msg += `- ${aVencer.length} nota(s) a vencer: ` +
+          aVencer.map(n => `R$ ${parseFloat(n.valor).toFixed(2).replace('.', ',')} (venc. ${formatarData(n.vencimento)})`).join(', ') + '\n';
+      }
+      if (!vencidas.length && !vencendoHoje.length && !aVencer.length) {
+        msg = "Preencha valor e vencimento de pelo menos uma nota!";
+      }
+      document.getElementById('mensagem').value = msg.trim();
+    }
+
+    function formatarData(data) {
+      const [ano, mes, dia] = data.split('-');
+      return `${dia}/${mes}/${ano}`;
+    }
+
+    // Inicializa
+    renderNotas();
+    window.atualizarNota = atualizarNota;
+    window.removerNota = removerNota;
+  </script>
+</body>
+</html>

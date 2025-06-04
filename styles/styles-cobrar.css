@@ -1,0 +1,32 @@
+/* ================================
+   Ferramenta: Cobrar
+================================== */
+
+/* Nenhum estilo específico por enquanto */
+
+textarea#mensagem {
+    min-height: 270px;
+}
+
+.linha-cobrar {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.linha-cobrar input[type="number"],
+.linha-cobrar input[type="text"] {
+  flex: 1 1 0;
+  min-width: 90px;
+  max-width: 200px;
+}
+
+.linha-cobrar .tipo-btn {
+  min-width: 120px;
+}
+
+/* Deixa o botão de tipo não clicado invisível */
+.linha-cobrar .tipo-btn:not(.clicado) {
+  display: none;
+}

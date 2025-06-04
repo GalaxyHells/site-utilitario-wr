@@ -1,0 +1,172 @@
+/* ================================
+   Ferramenta: Calculadora Cerâmica
+================================== */
+
+.campo-metros-calc {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  /* margin-bottom: 1rem; */
+}
+
+.campo-metros-calc input#metrosDesejados {
+  flex: 0 1 50%;
+  min-width: 60px;
+  max-width: 100%;
+}
+
+.campo-metros-calc input#largura,
+.campo-metros-calc input#comprimento {
+  flex: 0 1 25%;
+  min-width: 60px;
+  max-width: 100%;
+}
+
+p {
+  margin-top: 0px;
+}
+
+/* Modal fundo escuro/borrado */
+.modal-bg {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(30,30,30,0.55);
+  backdrop-filter: blur(1px);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+}
+.modal-flutuante {
+  background: #fff;
+  border-radius: 12px;
+  padding: 2rem 1.5rem;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+  min-width: 320px;
+  max-width: 95vw;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+.card-ceramica {
+  background: #f8f8fa;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 170px; /* ajuste conforme necessário */
+  padding: 1rem;
+  align-items: center;
+  /* min-width: 200px; */
+  max-width: 320px;
+  width: 100%;
+}
+.card-ceramica img {
+  width: 80px; height: 80px; object-fit: cover; border-radius: 6px; margin-bottom: 0.5rem;
+}
+.card-ceramica .info {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+.card-ceramica .nome { font-weight: bold; }
+.card-ceramica .metragem { color: #555; font-size: 0.95em; margin-bottom: 0.5rem; }
+.card-ceramica .selecionar-ceramica {
+  margin-top: auto;
+  align-self: stretch;
+  font-size: 0.85em;
+  padding: 0.2em 0.7em;
+  margin-top: 0.5rem;
+}
+.card-ceramica.adicionar-nova {
+  background: #e0e0e0;
+  color: #444;
+  cursor: pointer;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.card-ceramica.adicionar-nova .plus {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 0.3rem;
+}
+.checkboxes-lugares label {
+  display: inline-block;
+  margin-right: 1rem;
+  margin-bottom: 0.5rem;
+}
+.excluir-ceramica-btn {
+  position: absolute;
+  top: 7px;
+  right: 7px;
+  background: #fff;
+  color: #c00;
+  border: 1px solid #c00;
+  border-radius: 8px;
+  font-size: 1em;
+  width: 26px;
+  height: 26px;
+  cursor: pointer;
+  z-index: 2;
+  box-shadow: none;
+  transition: background 0.2s, color 0.2s, border 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+.excluir-ceramica-btn:hover {
+  background: #ffeaea;
+  color: #fff;
+  border-color: #a00;
+  background: #c00;
+}
+
+.popup-excluir-ceramica {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+  padding: 2rem 1.5rem;
+  z-index: 9999;
+  min-width: 260px;
+  max-width: 90vw;
+}
+.popup-excluir-conteudo {
+  text-align: center;
+}
+
+.catalogo-grid-ceramica {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(20px, 1fr));
+  gap: 1.2rem;
+  justify-items: center;
+}
+.card-ceramica {
+  /* min-width: 200px; */
+  max-width: 320px;
+  width: 100%;
+}
+
+#opcoesRejunte {
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 0.5rem !important;
+  justify-content: center !important;
+  align-items: center !important;
+  flex-wrap: nowrap !important;
+}
+
+/* Centraliza o botão de seleção de cerâmica */
+.etapa-ceramica-metros #abrirSelecaoCeramica {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}

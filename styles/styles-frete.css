@@ -1,0 +1,117 @@
+/* styles/frete.css */
+
+#ferramenta4 .form-frete {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1.5rem;
+  width: 100%;
+}
+
+#ferramenta4 .form-frete input[type="number"] {
+  padding: 0.6rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+#ferramenta4 button {
+  width: 100%;
+  /* margin-top: 1rem; */
+}
+
+#resultadoFrete {
+  white-space: pre-wrap;
+  background: #f3f3f3;
+  padding: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  margin-top: 1rem;
+  font-family: monospace;
+  font-size: 0.95rem;
+}
+
+.materiais-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.materiais-grid input {
+  width: 100%;
+}
+
+.frete-distancia-linha {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+
+.frete-distancia-linha input[type="number"] {
+  width: 30%;
+  min-width: 70px;
+  max-width: 120px;
+  padding: 0.6rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+/* .frete-distancia-linha  */
+select {
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 0.6rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+#listaLocaisEntrega li {
+  background: #f4f4f8;
+  border-radius: 7px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+  margin-bottom: 0.6rem;
+  padding: 0.7rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 1rem;
+}
+#listaLocaisEntrega .local-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+#listaLocaisEntrega .local-nome {
+  font-weight: 500;
+  color: #222;
+}
+#listaLocaisEntrega .local-detalhes {
+  font-size: 0.97em;
+  color: #666;
+}
+#listaLocaisEntrega .small-button {
+  padding: 4px 14px;
+  font-size: 0.97em;
+  background: #ffeaea;
+  color: #e63946;
+  border: none;
+  border-radius: 5px;
+  margin: 0;
+  transition: background 0.2s;
+  max-width: 200px;
+}
+#listaLocaisEntrega .small-button:hover {
+  background: #ffd6d6;
+}
+#listaLocaisEntrega .editar-btn {
+  background: #e6ffe6;
+  color: #219653;
+}
+#listaLocaisEntrega .editar-btn:hover {
+  background: #caffca;
+}

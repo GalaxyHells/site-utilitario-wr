@@ -1,0 +1,10 @@
+{
+    "emeraldwalk.runonsave": {
+      "commands": [
+        {
+          "match": ".*", // roda para qualquer arquivo salvo
+          "cmd": "node bump-version.js"
+        }
+      ]
+    }
+  }
