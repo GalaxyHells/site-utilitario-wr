@@ -233,4 +233,42 @@ window.removerHaver = function(idx) {
   }
 };
 
-renderizarLista();
+// Função para carregar do Firebase
+function carregarHaverFirebase() {
+  if (typeof firebase === 'undefined' || !firebase.database) {
+    // Firebase não disponível, carrega do localStorage
+    renderizarLista();
+    renderizarQuitados();
+    return;
+  }
+  const db = firebase.database();
+  db.ref('haver_lista').once('value').then(snapshot => {
+    const data = snapshot.val();
+    if (data && Array.isArray(data) && data.length > 0) {
+      listaHaver.length = 0;
+      data.forEach(item => listaHaver.push(item));
+    } else {
+      // Se não houver dados no Firebase, usa localStorage
+      listaHaver.length = 0;
+      JSON.parse(localStorage.getItem('haver_lista') || '[]').forEach(item => listaHaver.push(item));
+    }
+    renderizarLista();
+  });
+  db.ref('haver_quitados').once('value').then(snapshot => {
+    const data = snapshot.val();
+    if (data && Array.isArray(data) && data.length > 0) {
+      quitados.length = 0;
+      data.forEach(item => quitados.push(item));
+    } else {
+      // Se não houver dados no Firebase, usa localStorage
+      quitados.length = 0;
+      JSON.parse(localStorage.getItem('haver_quitados') || '[]').forEach(item => quitados.push(item));
+    }
+    renderizarQuitados();
+  });
+}
+
+// Chame isso ao iniciar a página
+window.addEventListener('DOMContentLoaded', carregarHaverFirebase);
+
+//renderizarLista();
