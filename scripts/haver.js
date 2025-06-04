@@ -15,10 +15,12 @@ function salvarHaverFirebase() {
   if (typeof firebase === 'undefined' || !firebase.database) return;
   try {
     const db = firebase.database();
-    db.ref('haver_lista').set(listaHaver);
-    db.ref('haver_quitados').set(quitados);
+    db.ref('haver_lista').set(listaHaver)
+      .catch(e => console.error('Erro ao salvar haver_lista:', e));
+    db.ref('haver_quitados').set(quitados)
+      .catch(e => console.error('Erro ao salvar haver_quitados:', e));
   } catch (e) {
-    // Falha silenciosa se firebase não estiver disponível
+    console.error('Erro ao salvar no Firebase:', e);
   }
 }
 
