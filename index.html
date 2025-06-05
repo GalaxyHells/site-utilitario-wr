@@ -70,398 +70,399 @@
 
   <!-- ==================================================================================== -->
 
-  <!-- Ferramenta 1: Cobrar -->
-  <div id="cobrar" class="container ferramenta active">
-    <h2>Gerador de Mensagem</h2>
+  <div class="ferramentas-wrapper">
+    <!-- Ferramenta 1: Cobrar -->
+    <div id="cobrar" class="container ferramenta active">
+      <h2>Gerador de Mensagem</h2>
 
-    <!-- Botão de resetar -->
-    <button id="resetarCobrar" class="" style="position: absolute; top: 24px; right: 32px;">Resetar</button>
+      <!-- Botão de resetar -->
+      <button id="resetarCobrar" class="" style="position: absolute; top: 24px; right: 32px;">Resetar</button>
 
-    <label>Vencidas</label>
-    <div id="vencidas-lista"></div>
-    <button type="button" class="" onclick="adicionarLinha('vencidas')" style="display:none;">+ Adicionar vencida</button>
+      <label>Vencidas</label>
+      <div id="vencidas-lista"></div>
+      <button type="button" class="" onclick="adicionarLinha('vencidas')" style="display:none;">+ Adicionar vencida</button>
 
-    <label>Vencendo hoje</label>
-    <div id="hoje-lista"></div>
-    <button type="button" class="" onclick="adicionarLinha('hoje')" style="display:none;">+ Adicionar hoje</button>
+      <label>Vencendo hoje</label>
+      <div id="hoje-lista"></div>
+      <button type="button" class="" onclick="adicionarLinha('hoje')" style="display:none;">+ Adicionar hoje</button>
 
-    <label>Vencendo nos próximos 7 dias</label>
-    <div id="sete-lista"></div>
-    <button type="button" class="" onclick="adicionarLinha('sete')" style="display:none;">+ Adicionar 7 dias</button>
+      <label>Vencendo nos próximos 7 dias</label>
+      <div id="sete-lista"></div>
+      <button type="button" class="" onclick="adicionarLinha('sete')" style="display:none;">+ Adicionar 7 dias</button>
 
-    <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
-        <button type="button" class=" btn-pix clicado" data-chave="05.346.003.0001.03" onclick="setarPix('05.346.003.0001.03')">CNPJ</button>
-        <button type="button" class=" btn-pix" data-chave="xxx.xxx.xxx-xx" onclick="setarPix('025.914.498-30')">CPF</button>
-        <button type="button" class=" btn-pix" data-chave="goloni.goloni@hotmail.com" onclick="setarPix('goloni.goloni@hotmail.com')">Email</button>
+      <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
+          <button type="button" class=" btn-pix clicado" data-chave="05.346.003.0001.03" onclick="setarPix('05.346.003.0001.03')">CNPJ</button>
+          <button type="button" class=" btn-pix" data-chave="xxx.xxx.xxx-xx" onclick="setarPix('025.914.498-30')">CPF</button>
+          <button type="button" class=" btn-pix" data-chave="goloni.goloni@hotmail.com" onclick="setarPix('goloni.goloni@hotmail.com')">Email</button>
+      </div>
+
+      <button onclick="gerarMensagem()">Gerar Mensagem</button>
+
+      <label for="mensagem">Mensagem gerada:</label>
+      <textarea id="mensagem" readonly></textarea>
+
+      <button class="" onclick="copiarMensagem()">Copiar mensagem</button>
     </div>
 
-    <button onclick="gerarMensagem()">Gerar Mensagem</button>
+    <!-- ==================================================================================== -->
 
-    <label for="mensagem">Mensagem gerada:</label>
-    <textarea id="mensagem" readonly></textarea>
+    <!-- Ferramenta 2: Calculadora de Cerâmica -->
+    <div id="ferramenta2" class="container ferramenta">
+    <!-- <section class="ferramenta-section"> -->
+      <h2 class="ferramenta-title"><i class="fas fa-th-large"></i> Calculadora de Cerâmica</h2>
+      <button id="resetarCeramica" class=" secondary" style="position: absolute; top: 24px; right: 32px;">Resetar</button>
 
-    <button class="" onclick="copiarMensagem()">Copiar mensagem</button>
-  </div>
+      <!-- [1] Inserir metragem desejada-->
+      <section class="etapa-ceramica-desejado">
+        <hr class="divisor-etapa">
+        <p class="etapa-titulo">Quantos metros/caixas o cliente quer?</p>
+        <div class="campo-metros-calc">
+          <input type="number" id="metrosDesejados" step="0.01" placeholder="Quantidade" />
+          <button type="button" class="primary clicado small-button" id="desejaMetros">Metros</button>
+          <button type="button" class="primary small-button" id="desejaCaixas">Caixas</button>
+          <span class="vertical-divider"></span>
+          <input type="number" id="largura" placeholder="Larg" step="0.01" />
+          <input type="number" id="comprimento" placeholder="Comp" step="0.01" />
+          <button type="button" class="primary small-button" id="calcularMetroQuadrado">Calcular</button>
+        </div>
+      </section>
 
-  <!-- ==================================================================================== -->
+      <!-- [2] Selecionar metragem por caixa -->
+      <section class="etapa-ceramica-metros">
+        <hr class="divisor-etapa">
+        <p class="etapa-titulo">Selecione a metragem por caixa:</p>
+        <div id="opcoesCeramica" class="flex-wrap-center">
+          <button class="secondary" onclick="selecionarCeramica(1.45)">1,45 m²</button>
+          <button class="secondary" onclick="selecionarCeramica(1.92)">1,92 m²</button>
+          <button class="secondary" onclick="selecionarCeramica(2.10)">2,10 m²</button>
+          <button class="secondary" onclick="selecionarCeramica(2.18)">2,18 m²</button>
+          <button class="secondary" onclick="selecionarCeramica(2.23)">2,23 m²</button>
+          <button class="secondary" onclick="selecionarCeramica(2.27)">2,27 m²</button>
+          <button class="secondary" onclick="selecionarCeramica(2.30)">2,30 m²</button>
+          <button class="secondary" onclick="selecionarCeramica(2.50)">2,50 m²</button>
+          <button class="secondary" onclick="selecionarCeramica(2.52)">2,52 m²</button>
+        </div>
+        <button id="abrirSelecaoCeramica" class="primary" style="margin-top: 1rem;">Selecionar cerâmica da lista</button>
 
-  <!-- Ferramenta 2: Calculadora de Cerâmica -->
-  <div id="ferramenta2" class="container ferramenta">
-  <!-- <section class="ferramenta-section"> -->
-    <h2 class="ferramenta-title"><i class="fas fa-th-large"></i> Calculadora de Cerâmica</h2>
-    <button id="resetarCeramica" class=" secondary" style="position: absolute; top: 24px; right: 32px;">Resetar</button>
+        <!-- Modal de seleção de cerâmica -->
+        <div id="modalSelecaoCeramica" class="modal-bg" style="display:none;">
+          <div class="modal-flutuante">
+            <h3>Selecione uma cerâmica</h3>
+            <div id="listaCeramicasCards" class="catalogo-grid-ceramica">
+              <!-- Cards de cerâmica serão carregados aqui via JS -->
+              <div class="card-ceramica adicionar-nova" id="abrirAdicionarCeramica">
+                <div class="plus">+</div>
+                <div>Adicionar nova cerâmica</div>
+              </div>
+            </div>
+            <button class="primary" id="fecharModalCeramica" style="margin-top:1rem;">Fechar</button>
 
-    <!-- [1] Inserir metragem desejada-->
-    <section class="etapa-ceramica-desejado">
-      <hr class="divisor-etapa">
-      <p class="etapa-titulo">Quantos metros/caixas o cliente quer?</p>
-      <div class="campo-metros-calc">
-        <input type="number" id="metrosDesejados" step="0.01" placeholder="Quantidade" />
-        <button type="button" class="primary clicado small-button" id="desejaMetros">Metros</button>
-        <button type="button" class="primary small-button" id="desejaCaixas">Caixas</button>
-        <span class="vertical-divider"></span>
-        <input type="number" id="largura" placeholder="Larg" step="0.01" />
-        <input type="number" id="comprimento" placeholder="Comp" step="0.01" />
-        <button type="button" class="primary small-button" id="calcularMetroQuadrado">Calcular</button>
-      </div>
-    </section>
-
-    <!-- [2] Selecionar metragem por caixa -->
-    <section class="etapa-ceramica-metros">
-      <hr class="divisor-etapa">
-      <p class="etapa-titulo">Selecione a metragem por caixa:</p>
-      <div id="opcoesCeramica" class="flex-wrap-center">
-        <button class="secondary" onclick="selecionarCeramica(1.45)">1,45 m²</button>
-        <button class="secondary" onclick="selecionarCeramica(1.92)">1,92 m²</button>
-        <button class="secondary" onclick="selecionarCeramica(2.10)">2,10 m²</button>
-        <button class="secondary" onclick="selecionarCeramica(2.18)">2,18 m²</button>
-        <button class="secondary" onclick="selecionarCeramica(2.23)">2,23 m²</button>
-        <button class="secondary" onclick="selecionarCeramica(2.27)">2,27 m²</button>
-        <button class="secondary" onclick="selecionarCeramica(2.30)">2,30 m²</button>
-        <button class="secondary" onclick="selecionarCeramica(2.50)">2,50 m²</button>
-        <button class="secondary" onclick="selecionarCeramica(2.52)">2,52 m²</button>
-      </div>
-      <button id="abrirSelecaoCeramica" class="primary" style="margin-top: 1rem;">Selecionar cerâmica da lista</button>
-
-      <!-- Modal de seleção de cerâmica -->
-      <div id="modalSelecaoCeramica" class="modal-bg" style="display:none;">
-        <div class="modal-flutuante">
-          <h3>Selecione uma cerâmica</h3>
-          <div id="listaCeramicasCards" class="catalogo-grid-ceramica">
-            <!-- Cards de cerâmica serão carregados aqui via JS -->
-            <div class="card-ceramica adicionar-nova" id="abrirAdicionarCeramica">
-              <div class="plus">+</div>
-              <div>Adicionar nova cerâmica</div>
+            <!-- Popup de exclusão de cerâmica -->
+            <div id="popupExcluirCeramica" class="popup-excluir-ceramica" style="display:none;">
+              <div class="popup-excluir-conteudo">
+                <p id="textoExcluirCeramica"></p>
+                <div style="display:flex; gap:1rem; justify-content:center; margin-top:1rem;">
+                  <button id="confirmarExcluirCeramica" class="primary" style="background:#c00;color:#fff;">Excluir</button>
+                  <button id="cancelarExcluirCeramica" class="">Cancelar</button>
+                </div>
+              </div>
             </div>
           </div>
-          <button class="primary" id="fecharModalCeramica" style="margin-top:1rem;">Fechar</button>
+        </div>
 
-          <!-- Popup de exclusão de cerâmica -->
-          <div id="popupExcluirCeramica" class="popup-excluir-ceramica" style="display:none;">
-            <div class="popup-excluir-conteudo">
-              <p id="textoExcluirCeramica"></p>
+        <!-- Modal de adicionar nova cerâmica -->
+        <div id="modalAdicionarCeramica" class="modal-bg" style="display:none;">
+          <div class="modal-flutuante">
+            <h3 style="text-align:center;">Adicionar nova cerâmica</h3>
+            <form id="formAdicionarCeramica">
+              <div style="display:flex; gap:1rem;">
+                <div style="flex:2;">
+                  <label>Nome:</label>
+                  <input type="text" id="nomeNovaCeramica" required>
+                </div>
+                <div style="flex:1;">
+                  <label>Valor (opcional):</label>
+                  <input type="text" id="valorNovaCeramica">
+                </div>
+              </div>
+              <div style="display:flex; gap:1rem;">
+                <div style="flex:1;">
+                  <label>Metragem por caixa (m²):</label>
+                  <input type="number" id="metragemCaixaNovaCeramica" step="0.01" required>
+                </div>
+                <div style="flex:1;">
+                  <label>Tamanho do piso (ex: 57x57):</label>
+                  <input type="text" id="tamanhoPisoNovaCeramica" placeholder="Ex: 57x57">
+                </div>
+              </div>
+              <div style="margin: 1rem 0;">
+                <label>Foto:</label>
+                <input type="file" id="fotoNovaCeramica" accept="image/*">
+              </div>
+              <label>Tipo de lugar indicado:</label>
+              <div class="checkboxes-lugares">
+                <label><input type="checkbox" value="banheiro chao"> Banheiro Chão</label>
+                <label><input type="checkbox" value="banheiro parede"> Banheiro Parede</label>
+                <label><input type="checkbox" value="cozinha chao"> Cozinha Chão</label>
+                <label><input type="checkbox" value="cozinha parede"> Cozinha Parede</label>
+                <label><input type="checkbox" value="calcada"> Calçada</label>
+                <label><input type="checkbox" value="muro"> Muro</label>
+              </div>
               <div style="display:flex; gap:1rem; justify-content:center; margin-top:1rem;">
-                <button id="confirmarExcluirCeramica" class="primary" style="background:#c00;color:#fff;">Excluir</button>
-                <button id="cancelarExcluirCeramica" class="">Cancelar</button>
+                <button type="submit" class="">Salvar</button>
+                <button type="button" class="" id="fecharModalAdicionarCeramica">Cancelar</button>
               </div>
-            </div>
+            </form>
           </div>
         </div>
-      </div>
+      </section>
 
-      <!-- Modal de adicionar nova cerâmica -->
-      <div id="modalAdicionarCeramica" class="modal-bg" style="display:none;">
-        <div class="modal-flutuante">
-          <h3 style="text-align:center;">Adicionar nova cerâmica</h3>
-          <form id="formAdicionarCeramica">
-            <div style="display:flex; gap:1rem;">
-              <div style="flex:2;">
-                <label>Nome:</label>
-                <input type="text" id="nomeNovaCeramica" required>
-              </div>
-              <div style="flex:1;">
-                <label>Valor (opcional):</label>
-                <input type="text" id="valorNovaCeramica">
-              </div>
-            </div>
-            <div style="display:flex; gap:1rem;">
-              <div style="flex:1;">
-                <label>Metragem por caixa (m²):</label>
-                <input type="number" id="metragemCaixaNovaCeramica" step="0.01" required>
-              </div>
-              <div style="flex:1;">
-                <label>Tamanho do piso (ex: 57x57):</label>
-                <input type="text" id="tamanhoPisoNovaCeramica" placeholder="Ex: 57x57">
-              </div>
-            </div>
-            <div style="margin: 1rem 0;">
-              <label>Foto:</label>
-              <input type="file" id="fotoNovaCeramica" accept="image/*">
-            </div>
-            <label>Tipo de lugar indicado:</label>
-            <div class="checkboxes-lugares">
-              <label><input type="checkbox" value="banheiro chao"> Banheiro Chão</label>
-              <label><input type="checkbox" value="banheiro parede"> Banheiro Parede</label>
-              <label><input type="checkbox" value="cozinha chao"> Cozinha Chão</label>
-              <label><input type="checkbox" value="cozinha parede"> Cozinha Parede</label>
-              <label><input type="checkbox" value="calcada"> Calçada</label>
-              <label><input type="checkbox" value="muro"> Muro</label>
-            </div>
-            <div style="display:flex; gap:1rem; justify-content:center; margin-top:1rem;">
-              <button type="submit" class="">Salvar</button>
-              <button type="button" class="" id="fecharModalAdicionarCeramica">Cancelar</button>
-            </div>
-          </form>
+      <!-- [3] Selecionar metragem sugerida -->
+      <section class="etapa-ceramica-metragem">
+        <hr class="divisor-etapa">
+        <div id="resultadoCeramica" style="text-align: center; margin-top: 2rem; display: none;">
+          <p id="caixasCalculadas"></p>
+          <div style="display: flex; justify-content: center; gap: 1rem;">
+            <button class="primary" id="botaoParaBaixo"></button>
+            <button class="primary" id="botaoParaCima"></button>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- [3] Selecionar metragem sugerida -->
-    <section class="etapa-ceramica-metragem">
-      <hr class="divisor-etapa">
-      <div id="resultadoCeramica" style="text-align: center; margin-top: 2rem; display: none;">
-        <p id="caixasCalculadas"></p>
-        <div style="display: flex; justify-content: center; gap: 1rem;">
-          <button class="primary" id="botaoParaBaixo"></button>
-          <button class="primary" id="botaoParaCima"></button>
+      <!-- [4] Selecionar quantidade argamassa -->
+      <section class="etapa-ceramica-argamassa">
+        <hr class="divisor-etapa">
+        <p id="tituloArgamassa" class="etapa-titulo" style="display: none;">Selecione a quantidade de argamassa:</p>
+        <div id="opcoesArgamassa" class="flex-wrap-center" style="display: none; flex-wrap: wrap; gap: 0.5rem; justify-content: center;">
+          <!-- Botões serão criados pelo JavaScript -->
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- [4] Selecionar quantidade argamassa -->
-    <section class="etapa-ceramica-argamassa">
-      <hr class="divisor-etapa">
-      <p id="tituloArgamassa" class="etapa-titulo" style="display: none;">Selecione a quantidade de argamassa:</p>
-      <div id="opcoesArgamassa" class="flex-wrap-center" style="display: none; flex-wrap: wrap; gap: 0.5rem; justify-content: center;">
-        <!-- Botões serão criados pelo JavaScript -->
-      </div>
-    </section>
-
-    <!-- Selecionar quantidade rejunte -->
-    <section class="etapa-ceramica-rejunnte">
-      <hr class="divisor-etapa">
-      <p id="tituloRejunte" class="etapa-titulo" style="display: none;">Selecione a quantidade de rejunte:</p>
-      <div id="opcoesRejunte" class="flex-wrap-center" style="display: none; flex-wrap: wrap; gap: 0.5rem; justify-content: center;">
-        <!-- Botões serão criados pelo JavaScript -->
-      </div>
-    </section>
-  <!-- </section> -->
-</div>
-
-  <!-- ==================================================================================== -->
-
-  <!-- Ferramenta 3: Em construção -->
-  <div id="ferramenta3" class="container ferramenta">
-    <h2>Controle de Haver de Clientes</h2>
-    <form id="formHaver" class="form-haver">
-      <div class="form-haver-row">
-        <input type="text" id="nomeCliente" placeholder="👤 Nome do cliente" required>
-        <input type="text" id="valorHaver" placeholder="💰 Valor (R$)" step="0.01" required>
-      </div>
-      <div class="form-haver-row">
-        <select id="tipoHaver">
-          <option value="devendo">Cliente devendo</option>
-          <option value="aReceber">Nós devendo</option>
-        </select>
-        <input type="text" id="descricaoHaver" placeholder="📝 Descrição/motivo">
-        <button type="submit" class="">Adicionar</button>
-      </div>
-    </form>
-
-    <ul id="listaHaver" style="list-style:none; padding:0;"></ul>
+      <!-- Selecionar quantidade rejunte -->
+      <section class="etapa-ceramica-rejunnte">
+        <hr class="divisor-etapa">
+        <p id="tituloRejunte" class="etapa-titulo" style="display: none;">Selecione a quantidade de rejunte:</p>
+        <div id="opcoesRejunte" class="flex-wrap-center" style="display: none; flex-wrap: wrap; gap: 0.5rem; justify-content: center;">
+          <!-- Botões serão criados pelo JavaScript -->
+        </div>
+      </section>
+    <!-- </section> -->
   </div>
 
-  <!-- Ferramenta 4: Frete -->
-  <div id="ferramenta4" class="container ferramenta">
-    <h2>Calculadora de Frete</h2>
+    <!-- ==================================================================================== -->
 
-    <div class="form-frete">
-      <!-- Linha: KM + Destino -->
-      <div class="frete-distancia-linha">
-        <input type="number" id="freteDistancia" placeholder="km" step="0.1" />
-        <select id="localPredefinido" onchange="setarDistanciaPredefinida()">
-          <option value="">Escolha um destino...</option>
-          <option value="22">Roseli Nunes (Escola) [22 km]</option>
-          <option value="13.6">Prata [13,6 km]</option>
-          <!-- Pode adicionar mais locais aqui -->
-        </select>
+    <!-- Ferramenta 3: Em construção -->
+    <div id="ferramenta3" class="container ferramenta">
+      <h2>Controle de Haver de Clientes</h2>
+      <form id="formHaver" class="form-haver">
+        <div class="form-haver-row">
+          <input type="text" id="nomeCliente" placeholder="👤 Nome do cliente" required>
+          <input type="text" id="valorHaver" placeholder="💰 Valor (R$)" step="0.01" required>
+        </div>
+        <div class="form-haver-row">
+          <select id="tipoHaver">
+            <option value="devendo">Cliente devendo</option>
+            <option value="aReceber">Nós devendo</option>
+          </select>
+          <input type="text" id="descricaoHaver" placeholder="📝 Descrição/motivo">
+          <button type="submit" class="">Adicionar</button>
+        </div>
+      </form>
+
+      <ul id="listaHaver" style="list-style:none; padding:0;"></ul>
+    </div>
+
+    <!-- Ferramenta 4: Frete -->
+    <div id="ferramenta4" class="container ferramenta">
+      <h2>Calculadora de Frete</h2>
+
+      <div class="form-frete">
+        <!-- Linha: KM + Destino -->
+        <div class="frete-distancia-linha">
+          <input type="number" id="freteDistancia" placeholder="km" step="0.1" />
+          <select id="localPredefinido" onchange="setarDistanciaPredefinida()">
+            <option value="">Escolha um destino...</option>
+            <option value="22">Roseli Nunes (Escola) [22 km]</option>
+            <option value="13.6">Prata [13,6 km]</option>
+            <!-- Pode adicionar mais locais aqui -->
+          </select>
+        </div>
+
+        <!-- Linha: Preço do diesel + Qualidade da estrada -->
+        <div class="frete-distancia-linha">
+          <input type="number" id="precoDiesel" placeholder="Preço do diesel (R$)" step="0.01" value="6.49" />
+          <select id="qualidadeEstrada">
+            <option value="0.0">Estrada boa</option>
+            <option value="0.10">Estrada média</option>
+            <option value="0.20">Estrada ruim</option>
+          </select>
+        </div>
+
+        <!-- Divisor visual -->
+        <hr class="divisor-etapa">
+
+        <!-- Materiais: 2 por linha -->
+        <div class="materiais-grid">
+          <input type="number" id="areiaFina" placeholder="Areia fina (m³)" step="0.01" oninput="atualizarPesoAutomaticamente()" />
+          <input type="number" id="areiaGrossa" placeholder="Areia grossa (m³)" step="0.01" oninput="atualizarPesoAutomaticamente()" />
+          <input type="number" id="pedra" placeholder="Pedra (m³)" step="0.01" oninput="atualizarPesoAutomaticamente()" />
+          <input type="number" id="pedrisco" placeholder="Pedrisco (m³)" step="0.01" oninput="atualizarPesoAutomaticamente()" />
+          <input type="number" id="cimento" placeholder="Cimento (sacos de 50kg)" step="1" oninput="atualizarPesoAutomaticamente()" />
+        </div>
+
+        <input type="number" id="fretePeso" placeholder="Peso da carga (toneladas)" step="0.1" style="display: none; max-width: 200px;" />
+
+        <button onclick="calcularFrete()">Calcular Frete</button>
+        <div id="resultadoFrete"></div>
+
+        <!-- Adicionar novo local de entrega -->
+        <section class="adicionar-local-frete" style="margin-bottom:1.5rem;">
+          <h3 style="font-size:1.1rem; margin-bottom:0.7rem;">Adicionar local de entrega</h3>
+          <div style="background:#f8f8fa; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.06); padding:1rem 1rem 0.7rem 1rem; margin-bottom:1.2rem;">
+            <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+              <input type="text" id="nomeNovoLocal" placeholder="Nome do local" style="flex:2; min-width:120px;">
+              <input type="number" id="kmNovoLocal" placeholder="Km" step="0.1" style="width:80px;">
+              <select id="condicaoNovoLocal" style="min-width:110px;">
+                <option value="0.0">Estrada boa</option>
+                <option value="0.10">Estrada média</option>
+                <option value="0.20">Estrada ruim</option>
+              </select>
+              <button type="button" class="" style="margin:0;" onclick="adicionarNovoLocal()">Adicionar</button>
+            </div>
+          </div>
+          <ul id="listaLocaisEntrega" style="list-style:none; padding:0; margin-top:0;">
+            <!-- Itens serão inseridos via JS -->
+          </ul>
+        </section>
       </div>
+    </div>
 
-      <!-- Linha: Preço do diesel + Qualidade da estrada -->
-      <div class="frete-distancia-linha">
-        <input type="number" id="precoDiesel" placeholder="Preço do diesel (R$)" step="0.01" value="6.49" />
-        <select id="qualidadeEstrada">
-          <option value="0.0">Estrada boa</option>
-          <option value="0.10">Estrada média</option>
-          <option value="0.20">Estrada ruim</option>
-        </select>
+    <!-- ==================================================================================== -->
+
+    <!-- Ferramenta 5: Nova Ferramenta -->
+    <div id="ferramenta5" class="container ferramenta">
+      <h2>Nova Ferramenta</h2>
+      <p>Conteúdo da nova ferramenta aqui.</p>
+    </div>
+
+    <!-- ==================================================================================== -->
+
+    <!-- Ferramenta 6: Criador de Catálogos -->
+    <div id="ferramenta6" class="container ferramenta">
+      <h2>Gerenciador de Catálogos</h2>
+
+      <!-- Formulário para criar ou editar um catálogo -->
+      <form id="formCriarCatalogo" class="form-produto">
+        <div>
+          <label for="nomeCatalogo">Nome do Catálogo:</label>
+          <input type="text" id="nomeCatalogo" placeholder="Digite o nome do catálogo" required>
+        </div>
+        <button type="submit" class="">Salvar Catálogo</button>
+      </form>
+
+      <!-- Divisor visual -->
+      <hr class="divisor-etapa">
+
+      <!-- Formulário para criar ou editar um produto -->
+       <h3>Criar/editar produto</h3>
+      <form id="formCriarProduto" class="form-produto">
+        <div class="linha-dupla">
+          <div style="flex:1;">
+            <label for="nomeProduto">Nome do Produto:</label>
+            <input type="text" id="nomeProduto" placeholder="Digite o nome do produto" required>
+          </div>
+          <div style="flex:1; margin-left: 1rem;">
+            <label for="precoProduto">Preço:</label>
+            <input type="text" id="precoProduto" placeholder="Digite o preço (ex: R$ 100,00)" required>
+          </div>
+        </div>
+
+        <div class="linha-dupla">
+          <div style="flex:1;">
+            <label for="imagemProduto">URL da Imagem:</label>
+            <input type="text" id="imagemProduto" placeholder="Cole o link da imagem">
+            <label for="fileImagemProduto" class="botao-imagem-personalizado">Escolher Imagem</label>
+            <input type="file" id="fileImagemProduto" accept="image/*" style="display:none;">
+          </div>
+          <div style="flex:1; margin-left: 1rem;">
+            <label for="descricaoProduto">Descrição (4 linhas):</label>
+            <textarea id="descricaoProduto" placeholder="Digite a descrição separada por linhas" rows="4" required></textarea>
+          </div>
+        </div>
+
+        <div style="margin-top: 0.5rem;">
+          <input type="checkbox" id="disponivelProduto" checked>
+          <label for="disponivelProduto">Disponível?</label>
+        </div>
+
+        <div style="display: flex; align-items: center; gap: 0.5rem; margin-top: 1rem;">
+          <button type="submit" class="" id="botaoProduto">Adicionar Produto</button>
+          <button type="button" class="" id="botaoCancelar" style="display:none;">Cancelar</button>
+        </div>
+      </form>
+
+      <!-- Divisor visual -->
+      <hr class="divisor-etapa">
+
+      <h3>Produtos no Catálogo</h3>
+      <div id="listaProdutos" class="produtos-grid">
+        <!-- Produtos adicionados serão exibidos aqui -->
       </div>
 
       <!-- Divisor visual -->
       <hr class="divisor-etapa">
 
-      <!-- Materiais: 2 por linha -->
-      <div class="materiais-grid">
-        <input type="number" id="areiaFina" placeholder="Areia fina (m³)" step="0.01" oninput="atualizarPesoAutomaticamente()" />
-        <input type="number" id="areiaGrossa" placeholder="Areia grossa (m³)" step="0.01" oninput="atualizarPesoAutomaticamente()" />
-        <input type="number" id="pedra" placeholder="Pedra (m³)" step="0.01" oninput="atualizarPesoAutomaticamente()" />
-        <input type="number" id="pedrisco" placeholder="Pedrisco (m³)" step="0.01" oninput="atualizarPesoAutomaticamente()" />
-        <input type="number" id="cimento" placeholder="Cimento (sacos de 50kg)" step="1" oninput="atualizarPesoAutomaticamente()" />
+      <h3>Catálogos Criados</h3>
+      <div id="listaCatalogos" class="catalogos-grid">
+        <!-- Catálogos criados serão exibidos aqui -->
       </div>
-
-      <input type="number" id="fretePeso" placeholder="Peso da carga (toneladas)" step="0.1" style="display: none; max-width: 200px;" />
-
-      <button onclick="calcularFrete()">Calcular Frete</button>
-      <div id="resultadoFrete"></div>
-
-      <!-- Adicionar novo local de entrega -->
-      <section class="adicionar-local-frete" style="margin-bottom:1.5rem;">
-        <h3 style="font-size:1.1rem; margin-bottom:0.7rem;">Adicionar local de entrega</h3>
-        <div style="background:#f8f8fa; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.06); padding:1rem 1rem 0.7rem 1rem; margin-bottom:1.2rem;">
-          <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
-            <input type="text" id="nomeNovoLocal" placeholder="Nome do local" style="flex:2; min-width:120px;">
-            <input type="number" id="kmNovoLocal" placeholder="Km" step="0.1" style="width:80px;">
-            <select id="condicaoNovoLocal" style="min-width:110px;">
-              <option value="0.0">Estrada boa</option>
-              <option value="0.10">Estrada média</option>
-              <option value="0.20">Estrada ruim</option>
-            </select>
-            <button type="button" class="" style="margin:0;" onclick="adicionarNovoLocal()">Adicionar</button>
-          </div>
-        </div>
-        <ul id="listaLocaisEntrega" style="list-style:none; padding:0; margin-top:0;">
-          <!-- Itens serão inseridos via JS -->
-        </ul>
-      </section>
-    </div>
-  </div>
-
-  <!-- ==================================================================================== -->
-
-  <!-- Ferramenta 5: Nova Ferramenta -->
-  <div id="ferramenta5" class="container ferramenta">
-    <h2>Nova Ferramenta</h2>
-    <p>Conteúdo da nova ferramenta aqui.</p>
-  </div>
-
-  <!-- ==================================================================================== -->
-
-  <!-- Ferramenta 6: Criador de Catálogos -->
-  <div id="ferramenta6" class="container ferramenta">
-    <h2>Gerenciador de Catálogos</h2>
-
-    <!-- Formulário para criar ou editar um catálogo -->
-    <form id="formCriarCatalogo" class="form-produto">
-      <div>
-        <label for="nomeCatalogo">Nome do Catálogo:</label>
-        <input type="text" id="nomeCatalogo" placeholder="Digite o nome do catálogo" required>
-      </div>
-      <button type="submit" class="">Salvar Catálogo</button>
-    </form>
-
-    <!-- Divisor visual -->
-    <hr class="divisor-etapa">
-
-    <!-- Formulário para criar ou editar um produto -->
-     <h3>Criar/editar produto</h3>
-    <form id="formCriarProduto" class="form-produto">
-      <div class="linha-dupla">
-        <div style="flex:1;">
-          <label for="nomeProduto">Nome do Produto:</label>
-          <input type="text" id="nomeProduto" placeholder="Digite o nome do produto" required>
-        </div>
-        <div style="flex:1; margin-left: 1rem;">
-          <label for="precoProduto">Preço:</label>
-          <input type="text" id="precoProduto" placeholder="Digite o preço (ex: R$ 100,00)" required>
-        </div>
-      </div>
-
-      <div class="linha-dupla">
-        <div style="flex:1;">
-          <label for="imagemProduto">URL da Imagem:</label>
-          <input type="text" id="imagemProduto" placeholder="Cole o link da imagem">
-          <label for="fileImagemProduto" class="botao-imagem-personalizado">Escolher Imagem</label>
-          <input type="file" id="fileImagemProduto" accept="image/*" style="display:none;">
-        </div>
-        <div style="flex:1; margin-left: 1rem;">
-          <label for="descricaoProduto">Descrição (4 linhas):</label>
-          <textarea id="descricaoProduto" placeholder="Digite a descrição separada por linhas" rows="4" required></textarea>
-        </div>
-      </div>
-
-      <div style="margin-top: 0.5rem;">
-        <input type="checkbox" id="disponivelProduto" checked>
-        <label for="disponivelProduto">Disponível?</label>
-      </div>
-
-      <div style="display: flex; align-items: center; gap: 0.5rem; margin-top: 1rem;">
-        <button type="submit" class="" id="botaoProduto">Adicionar Produto</button>
-        <button type="button" class="" id="botaoCancelar" style="display:none;">Cancelar</button>
-      </div>
-    </form>
-
-    <!-- Divisor visual -->
-    <hr class="divisor-etapa">
-
-    <h3>Produtos no Catálogo</h3>
-    <div id="listaProdutos" class="produtos-grid">
-      <!-- Produtos adicionados serão exibidos aqui -->
     </div>
 
-    <!-- Divisor visual -->
-    <hr class="divisor-etapa">
+    <!-- ==================================================================================== -->
 
-    <h3>Catálogos Criados</h3>
-    <div id="listaCatalogos" class="catalogos-grid">
-      <!-- Catálogos criados serão exibidos aqui -->
+    <!-- Ferramenta 7: Catálogo -->
+    <div id="ferramenta7" class="container ferramenta bigger-container">
+      <h2>Catálogo de Produtos</h2>
+
+      <select id="colunasSelector" class="" style="position: absolute; top: 24px; right: 32px;">>
+        <option value="1">1 Coluna</option>
+        <option value="2">2 Colunas</option>
+        <option value="3">3 Colunas</option>
+        <option value="4" selected>4 Colunas</option>
+        <option value="5">5 Colunas</option>
+      </select>
+
+      <select id="selecionarCatalogo" class="" style="margin-bottom: 1rem;">
+        <option value="">Selecione um Catálogo</option>
+      </select>
+
+      <div id="catalogoGrid" class="catalogo-grid">
+        <!-- Os itens do catálogo serão adicionados dinamicamente via JavaScript -->
+      </div>
+      <button id="compartilharCatalogo" class="" style="margin-top: 1rem;">Compartilhar via WhatsApp (Texto)</button>
+      <button id="capturarCatalogo" class="" style="margin-top: 1rem;">Capturar imagem</button>
+      <button id="baixarCatalogo" class="">Baixar Catálogo</button>
     </div>
-  </div>
 
-  <!-- ==================================================================================== -->
+    <!-- ==================================================================================== -->
 
-  <!-- Ferramenta 7: Catálogo -->
-  <div id="ferramenta7" class="container ferramenta bigger-container">
-    <h2>Catálogo de Produtos</h2>
-
-    <select id="colunasSelector" class="" style="position: absolute; top: 24px; right: 32px;">>
-      <option value="1">1 Coluna</option>
-      <option value="2">2 Colunas</option>
-      <option value="3">3 Colunas</option>
-      <option value="4" selected>4 Colunas</option>
-      <option value="5">5 Colunas</option>
-    </select>
-
-    <select id="selecionarCatalogo" class="" style="margin-bottom: 1rem;">
-      <option value="">Selecione um Catálogo</option>
-    </select>
-
-    <div id="catalogoGrid" class="catalogo-grid">
-      <!-- Os itens do catálogo serão adicionados dinamicamente via JavaScript -->
+    <div style="
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      background: rgba(40,40,40,0.92);
+      color: #fff;
+      font-size: 0.95rem;
+      padding: 7px 16px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      z-index: 9999;
+      pointer-events: none;
+      user-select: none;
+    ">
+      Versão 0.14.87
     </div>
-    <button id="compartilharCatalogo" class="" style="margin-top: 1rem;">Compartilhar via WhatsApp (Texto)</button>
-    <button id="capturarCatalogo" class="" style="margin-top: 1rem;">Capturar imagem</button>
-    <button id="baixarCatalogo" class="">Baixar Catálogo</button>
-  </div>
 
-  <!-- ==================================================================================== -->
-
-  <div style="
-    position: fixed;
-    right: 18px;
-    bottom: 18px;
-    background: rgba(40,40,40,0.92);
-    color: #fff;
-    font-size: 0.95rem;
-    padding: 7px 16px;
-    border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-    z-index: 9999;
-    pointer-events: none;
-    user-select: none;
-  ">
-    Versão 0.13.250
-  </div>
-
-  <div id="toast" style="display:none; position:fixed; bottom:80px; right:24px; background:#222; color:#fff; padding:10px 20px; border-radius:6px; z-index:9999;">Mensagem copiada!</div>
-</body>
-</html>
+    <div id="toast" style="display:none; position:fixed; bottom:80px; right:24px; background:#222; color:#fff; padding:10px 20px; border-radius:6px; z-index:9999;">Mensagem copiada!</div>
+  </body>
+  </html>

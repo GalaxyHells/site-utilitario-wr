@@ -11,7 +11,8 @@
   --primary-clicked: #c72d2d; /* tom de vermelho forte, mais claro e vibrante */
   --primary-disabled: #ffb3b3;
   --secondary-color: #ffffff;
-  --background-color: #f7f7f7;
+  --background-color: #bdbdbd;
+  /* --background-color: #f7f7f7; */
   --text-color: #333333;
 }
 
@@ -43,7 +44,8 @@ body {
   align-items: flex-start;
   min-height: 100vh;
   line-height: 1.5;
-  overflow: auto;
+  overflow: hidden; /* Impede rolagem global */
+  height: 100vh;
 }
 
 /* Zoom-in na abertura do site */
@@ -108,7 +110,7 @@ body {
   padding: 2rem 1.5rem 0.5rem 1.5rem;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  margin-top: 120px;
+  /* margin-top: 120px; */
 }
 
 .bigger-container {
@@ -152,13 +154,15 @@ body {
   transform: translateY(30px);
   transition: opacity 0.4s, transform 0.4s;
   pointer-events: none;
-  position: absolute;
+  position: relative;
   width: 100%;
   visibility: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
+  display: none;
+  margin-bottom: 0px;
 }
 
 .ferramenta.active {
@@ -166,6 +170,7 @@ body {
   transform: translateY(0);
   pointer-events: auto;
   visibility: visible;
+  display: flex;
 }
 
 .ferramenta-section {
@@ -302,4 +307,20 @@ button:disabled {
   cursor: not-allowed;
   opacity: 0.7;
   box-shadow: none;
+}
+
+.ferramentas-wrapper {
+  width: 100%;
+  max-width: 900px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* Faz só esse elemento ser rolável */
+  max-height: calc(100vh - 0rem);/* Ajuste 5rem conforme altura da toolbar/margens */
+  overflow-y: auto;
+  padding-bottom: 64px;
+  /* margin-top: 100px; */
+  padding-top: 120px;
+  border-radius: 12px;;
 }
