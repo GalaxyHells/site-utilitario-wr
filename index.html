@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="styles/styles-frete.css" />
   <link rel="stylesheet" href="styles/styles-produtos.css" />
   <link rel="stylesheet" href="styles/styles-catalogo.css" />
+  <link rel="stylesheet" href="styles/styles-mensagens.css" />
 
   <!-- Favicon -->
   <link rel="shortcut icon" href="ico.ico" type="image/x-icon">
@@ -46,6 +47,8 @@
   <script src="scripts/frete.js" defer></script>
   <script type="module" src="scripts/produtos.js" defer></script>
   <script type="module" src="scripts/catalogo.js" defer></script>
+  <script src="scripts/mensagens.js" defer></script>
+  <script src="scripts/falta.js" defer></script>
 
   <!-- Fontes -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -66,6 +69,8 @@
     <button class="tab-button hidden" onclick="mostrarFerramenta('ferramenta5')">Produtos</button>
     <button class="tab-button" onclick="mostrarFerramenta('ferramenta6')">Produtos</button>
     <button class="tab-button" onclick="mostrarFerramenta('ferramenta7')">Catálogo</button>
+    <button class="tab-button" onclick="mostrarFerramenta('ferramenta8')">Mensagens</button>
+    <button class="tab-button" onclick="mostrarFerramenta('ferramenta9')">Falta</button>
   </div>
 
   <!-- ==================================================================================== -->
@@ -446,6 +451,45 @@
 
     <!-- ==================================================================================== -->
 
+    <!-- Ferramenta 8: Mensagens Rápidas -->
+    <div id="ferramenta8" class="container ferramenta">
+      <h2 style="text-align:center; margin-bottom:1.2rem;">Mensagens Rápidas</h2>
+      <form id="formMensagemRapida" class="mensagens-form">
+        <input id="tituloMensagem" type="text" placeholder="Título da mensagem" required style="margin-bottom:0.7rem;">
+        <textarea id="novaMensagem" placeholder="Digite a mensagem rápida..." required rows="3"></textarea>
+        <button type="submit" class="mensagens-btn-adicionar"><i class="fas fa-plus"></i> Adicionar</button>
+      </form>
+      <ul id="listaMensagensRapidas" class="mensagens-lista"></ul>
+    </div>
+
+    <!-- ==================================================================================== -->
+
+    <!-- Ferramenta 9: Lista de Coisas em Falta -->
+    <div id="ferramenta9" class="container ferramenta bigger-container">
+      <h2 style="text-align:center; margin-bottom:1.2rem;">Coisas em Falta / Lista de Compras</h2>
+      <form id="formFalta" class="falta-form" style="margin-bottom:1.2rem; display:flex; gap:0.7rem; flex-wrap:wrap;">
+        <input id="produtoFalta" type="text" placeholder="Produto" required style="flex:3; min-width:220px;">
+        <button type="submit" class="mensagens-btn-adicionar" style="flex:1; min-width:100px;"><i class="fas fa-plus"></i> Adicionar</button>
+      </form>
+      <div style="overflow-x:auto;">
+        <table id="tabelaFalta" class="falta-tabela" style="width:100%; border-collapse:collapse;">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Produto</th>
+              <th>Data de Adição</th>
+              <th>Data de Compra</th>
+              <th>Comprado?</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="listaFalta"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ==================================================================================== -->
+
     <div style="
       position: fixed;
       right: 18px;
@@ -460,7 +504,7 @@
       pointer-events: none;
       user-select: none;
     ">
-      Versão 0.14.87
+      Versão 0.16.1
     </div>
 
     <div id="toast" style="display:none; position:fixed; bottom:80px; right:24px; background:#222; color:#fff; padding:10px 20px; border-radius:6px; z-index:9999;">Mensagem copiada!</div>

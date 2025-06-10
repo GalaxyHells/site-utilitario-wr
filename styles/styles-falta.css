@@ -1,0 +1,36 @@
+.falta-tabela {
+  border-collapse: separate;
+  border-spacing: 1rem 100rem; /* 0 para linhas, 0.5rem para colunas */
+  /* Você pode aumentar o valor para mais espaço, ex: 1rem */
+}
+
+.falta-tabela th, .falta-tabela td {
+  padding: 0.5rem 0.7rem;
+  border-bottom: 1px solid #e0e0e0;
+  text-align: center;
+}
+.falta-tabela th {
+  background: #f2f2f2;
+  font-weight: 600;
+}
+.falta-tabela tr:last-child td {
+  border-bottom: none;
+}
+.falta-tabela td {
+  background: #fafbfc;
+}
+.falta-tabela button {
+  background: #e0e0e0;
+  color: #444;
+  border: none;
+  border-radius: 5px;
+  padding: 0.3rem 0.7rem;
+  font-size: 0.95rem;
+  cursor: pointer;
+  margin-left: 0.3rem;
+  transition: background 0.2s;
+}
+.falta-tabela button:hover {
+  background: #e63946;
+  color: #fff;
+}

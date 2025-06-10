@@ -30,7 +30,7 @@ document.getElementById("selecionarCatalogo").addEventListener("change", async f
     // Define o estilo do card se indisponível
     const indisponivel = item.disponivel === false;
     const cardStyle = indisponivel
-      ? "background:#f2f2f2; opacity:0.7; filter:grayscale(0.3);"
+      ? "background:rgb(202,202,202); opacity:0.7; filter:grayscale(0.3);"
       : "";
 
     const div = document.createElement("div");

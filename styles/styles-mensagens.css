@@ -1,0 +1,93 @@
+/* Ferramenta Mensagens Rápidas */
+#ferramenta8 .mensagens-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  margin-bottom: 1.5rem;
+  width: 90%;
+}
+
+#ferramenta8 textarea {
+  width: 100%;
+  min-height: 60px;
+  font-size: 1rem;
+  padding: 0.8rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  resize: vertical;
+  background: #fafbfc;
+  transition: border 0.2s;
+}
+#ferramenta8 textarea:focus {
+  border: 1.5px solid #e63946;
+  outline: none;
+}
+
+.mensagens-btn-adicionar {
+  align-self: flex-end;
+  background: var(--primary-color);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.mensagens-btn-adicionar:hover {
+  background: var(--primary-hover);
+}
+
+.mensagens-lista {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.mensagens-lista li {
+  background: #f7f7f7;
+  border-radius: 8px;
+  padding: 1rem 1.2rem 0.8rem 1.2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  position: relative;
+}
+
+.mensagens-lista span {
+  white-space: pre-line;
+  font-size: 1.05rem;
+  color: #333;
+  flex: 1;
+}
+
+.mensagens-lista .mensagens-acoes {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.mensagens-lista button {
+  background: #e0e0e0;
+  color: #444;
+  border: none;
+  border-radius: 5px;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.98rem;
+  cursor: pointer;
+  transition: background 0.2s;
+  margin-left: 0;
+}
+.mensagens-lista button:hover {
+  background: #e63946;
+  color: #fff;
+}
