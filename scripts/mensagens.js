@@ -23,7 +23,7 @@ function carregarMensagens() {
       li.innerHTML = `
         <span>
           ${titulo ? `<strong>${titulo}</strong><br>` : ''}
-          <span style="white-space:pre-line;">${texto}</span>
+          <span style="white-space:pre-line;">${formatarMensagemParaExibir(texto)}</span>
         </span>
         <div class="mensagens-acoes">
           <button onclick="copiarMensagemRapida(\`${texto.replace(/`/g, '\\`')}\`)"><i class="fas fa-copy"></i> Copiar</button>
@@ -125,3 +125,11 @@ input.addEventListener('input', function() {
   this.style.height = 'auto';
   this.style.height = (this.scrollHeight) + 'px';
 });
+
+function formatarMensagemParaExibir(texto) {
+  // Sublinhado primeiro (para evitar conflito com negrito dentro de sublinhado)
+  texto = texto.replace(/__(.*?)__/g, '<u>$1</u>');
+  // Negrito
+  texto = texto.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+  return texto;
+}

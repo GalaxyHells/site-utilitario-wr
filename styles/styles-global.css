@@ -134,7 +134,7 @@ body {
   top: 2rem;
   left: 50%;
   transform: translateX(-50%);
-  max-width: 900px;
+  max-width: 1200px;
   width: 90%;
   background-color: var(--secondary-color);
   padding: 1rem;
