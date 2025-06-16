@@ -124,6 +124,12 @@ body {
   margin-right: 0;
   font-weight: 500;
   text-align: center;
+  color: var(--text-color); /* Adiciona esta linha */
+}
+
+/* Para garantir que todos os parágrafos do site herdem a cor do tema */
+p {
+  color: var(--text-color);
 }
 
 /* =====================================
@@ -296,6 +302,7 @@ button:active {
 
 button.clicado {
   background: var(--primary-clicked);
+  border: 2.5px solid #6e161e;
 }
 
 .small-button {

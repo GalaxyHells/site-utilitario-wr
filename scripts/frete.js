@@ -4,7 +4,10 @@ function calcularFrete() {
   const distancia = parseFloat(document.getElementById("freteDistancia").value);
   const peso = parseFloat(document.getElementById("fretePeso").value);
   const precoDiesel = parseFloat(document.getElementById("precoDiesel").value);
-  const ajusteEstrada = parseFloat(document.getElementById("qualidadeEstrada").value); // pega o ajuste do select
+  const ajusteEstrada = parseFloat(document.getElementById("qualidadeEstrada").value);
+  const veiculoSelect = document.getElementById("veiculoFrete");
+  const veiculo = veiculoSelect.options[veiculoSelect.selectedIndex].text;
+  console.log(veiculo);
 
   if (isNaN(distancia) || isNaN(peso) || isNaN(precoDiesel)) {
     mostrarResultadoFrete("Preencha todos os campos corretamente.");
@@ -17,9 +20,18 @@ function calcularFrete() {
 
   const ida = distancia;
   const volta = distancia;
-  // Aplica ajuste da estrada na ida e na volta
-  const consumoIda = (5 - (0.5 * peso)) * (1 - ajusteEstrada);
-  const consumoVolta = 5 * (1 - ajusteEstrada);
+
+  let consumoIda, consumoVolta;
+
+  if (veiculo === "L1620") {
+    // L1620: Consumo vazio 4 km/l, perde 0.3 km/l por tonelada
+    consumoIda = (4 - (0.3 * peso)) * (1 - ajusteEstrada);
+    consumoVolta = 4 * (1 - ajusteEstrada);
+  } else {
+    // F4000: lógica original
+    consumoIda = (5 - (0.5 * peso)) * (1 - ajusteEstrada);
+    consumoVolta = 5 * (1 - ajusteEstrada);
+  }
 
   const litrosIda = ida / consumoIda;
   const litrosVolta = volta / consumoVolta;
@@ -34,7 +46,7 @@ function calcularFrete() {
     `🛣️ Distância total: ${distancia * 2} km\n` +
     `⛽ Consumo ida: ${consumoIda.toFixed(2)} km/L\n` +
     `⛽ Consumo volta: ${consumoVolta.toFixed(2)} km/L\n` +
-    `🪫 Total de diesel: ${litrosTotal.toFixed(2).replace('.', ',')} L\n` +
+    `⛽ Total de diesel: ${litrosTotal.toFixed(2).replace('.', ',')} L\n` +
     `💸 Custo com diesel: R$ ${custoDiesel.toFixed(2).replace('.', ',')}`
   );
 }

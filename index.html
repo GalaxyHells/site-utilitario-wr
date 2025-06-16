@@ -293,13 +293,17 @@
           </select>
         </div>
 
-        <!-- Linha: Preço do diesel + Qualidade da estrada -->
+        <!-- Linha: Preço do diesel + Qualidade da estrada + Veículo -->
         <div class="frete-distancia-linha">
           <input type="number" id="precoDiesel" placeholder="Preço do diesel (R$)" step="0.01" value="6.49" />
           <select id="qualidadeEstrada">
             <option value="0.0">Estrada boa</option>
             <option value="0.10">Estrada média</option>
             <option value="0.20">Estrada ruim</option>
+          </select>
+          <select id="veiculoFrete" style="margin-left: 1rem;">
+            <option value="F4000" selected>F4000</option>
+            <option value="L1260">L1620</option>
           </select>
         </div>
 
@@ -504,7 +508,7 @@
       pointer-events: none;
       user-select: none;
     ">
-      Versão 0.16.41
+      Versão 0.16.64
     </div>
 
     <div id="toast" style="display:none; position:fixed; bottom:80px; right:24px; background:#222; color:#fff; padding:10px 20px; border-radius:6px; z-index:9999;">Mensagem copiada!</div>
