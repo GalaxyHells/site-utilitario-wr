@@ -62,14 +62,16 @@ function atualizarPesoAutomaticamente() {
   const volumePedra = parseFloat(document.getElementById("pedra").value) || 0;
   const volumePedrisco = parseFloat(document.getElementById("pedrisco").value) || 0;
   const sacosCimento = parseInt(document.getElementById("cimento").value) || 0;
+  const pesoExtraKg = parseFloat(document.getElementById("pesoExtra").value) || 0;
 
   const pesoAreiaFina = volumeAreiaFina * 1.4;
   const pesoAreiaGrossa = volumeAreiaGrossa * 1.6;
   const pesoPedra = volumePedra * 1.7;
   const pesoPedrisco = volumePedrisco * 1.5;
   const pesoCimento = (sacosCimento * 50) / 1000; // 50kg por saco => toneladas
+  const pesoExtraToneladas = pesoExtraKg / 1000; // converte kg para toneladas
 
-  const pesoTotal = pesoAreiaFina + pesoAreiaGrossa + pesoPedra + pesoPedrisco + pesoCimento;
+  const pesoTotal = pesoAreiaFina + pesoAreiaGrossa + pesoPedra + pesoPedrisco + pesoCimento + pesoExtraToneladas;
 
   document.getElementById("fretePeso").value = pesoTotal.toFixed(2);
 }

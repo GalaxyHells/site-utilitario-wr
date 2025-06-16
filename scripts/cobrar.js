@@ -13,11 +13,13 @@ function criarLinha(tipo, idx) {
     <div class="linha-cobrar" data-tipo="${tipo}" data-idx="${idx}">
       <input type="number" min="1" placeholder="Qtd." class="qtd" style="width:60px;">
       <input type="text" placeholder="Valor (R$)" class="valor" style="width:110px;">
-      <button type="button" class="small-button tipo-btn clicado" data-tipo="Nota">Nota</button>
-      <button type="button" class="small-button tipo-btn" data-tipo="Boleto">Boleto</button>
-      <button type="button" class="small-button" onclick="removerLinha('${tipo}', ${idx})" style="background:#eee;color:#444;">✕</button>
+      <span class="doc-tipo tipo-btn clicado" data-tipo="Nota">Nota</span>
+      <span class="doc-tipo tipo-btn" data-tipo="Boleto">Boleto</span>
+      
     </div>
   `;
+
+  // <button type="button" class="small-button" onclick="removerLinha('${tipo}', ${idx})" style="background:#eee;color:#444;">✕</button>
 }
 
 let linhas = { vencidas: [], hoje: [], sete: [] };

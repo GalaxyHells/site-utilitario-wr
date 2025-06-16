@@ -331,3 +331,30 @@ button:disabled {
   padding-top: 120px;
   border-radius: 12px;;
 }
+
+.doc-tipo {
+  display: inline-block;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.doc-tipo[data-tipo="Nota"] {
+  /* background: #d32f2f; */ /* Vermelho mais escuro */
+  background: #ff4444; /* Vermelho mais claro */
+}
+
+.doc-tipo[data-tipo="Boleto"] {
+   /* background: #d32f2f; */ /* Vermelho mais escuro */
+  background: #ff4444; /* Vermelho mais claro */
+}
+
+.doc-tipo.clicado {
+  transform: scale(1.05);
+  box-shadow: 0 2px 8px rgba(230,57,70,0.2);
+  border: 1.5px solid #fff;
+}
