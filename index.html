@@ -77,36 +77,101 @@
 
   <div class="ferramentas-wrapper">
     <!-- Ferramenta 1: Cobrar -->
-    <div id="cobrar" class="container ferramenta active">
-      <h2>Gerador de Mensagem</h2>
+    <div id="cobrar" class="container ferramenta active less-bigger-container">
+      <h2><i class="fas fa-file-invoice-dollar"></i> Gerador de Mensagem</h2>
 
-      <!-- Botão de resetar -->
-      <button id="resetarCobrar" class="" style="position: absolute; top: 24px; right: 32px;">Resetar</button>
+      <button id="resetarCobrar" class="secondary" style="position: absolute; top: 24px; right: 32px;">
+        <i class="fas fa-redo"></i> Resetar
+      </button>
 
-      <label>Vencidas</label>
-      <div id="vencidas-lista"></div>
-      <button type="button" class="" onclick="adicionarLinha('vencidas')" style="display:none;">+ Adicionar vencida</button>
+      <div class="colunas-cobranca">
+        <!-- Coluna Esquerda: Notas -->
+        <div class="coluna-cobranca">
+          <h3 class="coluna-titulo"><i class="fas fa-file-invoice"></i> Notas</h3>
+          
+          <div class="secao-cobranca">
+            <label class="secao-titulo"><i class="fas fa-clock-rotate-left"></i> Vencidas</label>
+            <div class="linha-cobrar">
+              <input type="number" min="1" placeholder="Qtd." class="qtd" style="width:60px;">
+              <input type="text" placeholder="Valor (R$)" class="valor" style="width:110px;">
+              <!-- <span class="doc-tipo tipo-btn clicado" data-tipo="Nota">Nota</span> -->
+            </div>
+          </div>
 
-      <label>Vencendo hoje</label>
-      <div id="hoje-lista"></div>
-      <button type="button" class="" onclick="adicionarLinha('hoje')" style="display:none;">+ Adicionar hoje</button>
+          <div class="secao-cobranca">
+            <label class="secao-titulo"><i class="fas fa-calendar-day"></i> Vencendo hoje</label>
+            <div class="linha-cobrar">
+              <input type="number" min="1" placeholder="Qtd." class="qtd" style="width:60px;">
+              <input type="text" placeholder="Valor (R$)" class="valor" style="width:110px;">
+              <!-- <span class="doc-tipo tipo-btn clicado" data-tipo="Nota">Nota</span> -->
+            </div>
+          </div>
 
-      <label>Vencendo nos próximos 7 dias</label>
-      <div id="sete-lista"></div>
-      <button type="button" class="" onclick="adicionarLinha('sete')" style="display:none;">+ Adicionar 7 dias</button>
+          <div class="secao-cobranca">
+            <label class="secao-titulo"><i class="fas fa-calendar-week"></i> Próximos 7 dias</label>
+            <div class="linha-cobrar">
+              <input type="number" min="1" placeholder="Qtd." class="qtd" style="width:60px;">
+              <input type="text" placeholder="Valor (R$)" class="valor" style="width:110px;">
+              <!-- <span class="doc-tipo tipo-btn clicado" data-tipo="Nota">Nota</span> -->
+            </div>
+          </div>
+        </div>
 
-      <div style="display: flex; gap: 0.5rem; margin-bottom: 1rem;">
-          <button type="button" class=" btn-pix clicado" data-chave="05.346.003.0001.03" onclick="setarPix('05.346.003.0001.03')">CNPJ</button>
-          <button type="button" class=" btn-pix" data-chave="xxx.xxx.xxx-xx" onclick="setarPix('025.914.498-30')">CPF</button>
-          <button type="button" class=" btn-pix" data-chave="goloni.goloni@hotmail.com" onclick="setarPix('goloni.goloni@hotmail.com')">Email</button>
+        <!-- Coluna Direita: Boletos -->
+        <div class="coluna-cobranca">
+          <h3 class="coluna-titulo"><i class="fas fa-receipt"></i> Boletos</h3>
+          
+          <div class="secao-cobranca">
+            <label class="secao-titulo"><i class="fas fa-clock-rotate-left"></i> Vencidos</label>
+            <div class="linha-cobrar">
+              <input type="number" min="1" placeholder="Qtd." class="qtd" style="width:60px;">
+              <input type="text" placeholder="Valor (R$)" class="valor" style="width:110px;">
+              <!-- <span class="doc-tipo tipo-btn clicado" data-tipo="Boleto">Boleto</span> -->
+            </div>
+          </div>
+
+          <div class="secao-cobranca">
+            <label class="secao-titulo"><i class="fas fa-calendar-day"></i> Vencendo hoje</label>
+            <div class="linha-cobrar">
+              <input type="number" min="1" placeholder="Qtd." class="qtd" style="width:60px;">
+              <input type="text" placeholder="Valor (R$)" class="valor" style="width:110px;">
+              <!-- <span class="doc-tipo tipo-btn clicado" data-tipo="Boleto">Boleto</span> -->
+            </div>
+          </div>
+
+          <div class="secao-cobranca">
+            <label class="secao-titulo"><i class="fas fa-calendar-week"></i> Próximos 7 dias</label>
+            <div class="linha-cobrar">
+              <input type="number" min="1" placeholder="Qtd." class="qtd" style="width:60px;">
+              <input type="text" placeholder="Valor (R$)" class="valor" style="width:110px;">
+              <!-- <span class="doc-tipo tipo-btn clicado" data-tipo="Boleto">Boleto</span> -->
+            </div>
+          </div>
+        </div>
       </div>
 
-      <button onclick="gerarMensagem()">Gerar Mensagem</button>
+      <div class="opcoes-pix">
+        <label class="secao-titulo"><i class="fas fa-qrcode"></i> Chave PIX</label>
+        <div class="botoes-pix">
+          <button type="button" class="btn-pix" onclick="setarPix('05.346.003/0001-00')">CNPJ</button>
+          <button type="button" class="btn-pix" onclick="setarPix('025.914.498-30')">CPF</button>
+          <button type="button" class="btn-pix" onclick="setarPix('goloni.goloni@hotmail.com')">Email</button>
+        </div>
+      </div>
 
-      <label for="mensagem">Mensagem gerada:</label>
-      <textarea id="mensagem" readonly></textarea>
+      <div class="acoes-mensagem">
+        <button onclick="gerarMensagem()" class="primary">
+          <i class="fas fa-sync"></i> Gerar Mensagem
+        </button>
+        <button onclick="copiarMensagem()" class="secondary">
+          <i class="fas fa-copy"></i> Copiar Mensagem
+        </button>
+      </div>
 
-      <button class="" onclick="copiarMensagem()">Copiar mensagem</button>
+      <div class="campo-mensagem">
+        <label for="mensagem"><i class="fas fa-comment-alt"></i> Mensagem gerada:</label>
+        <textarea id="mensagem" readonly></textarea>
+      </div>
     </div>
 
     <!-- ==================================================================================== -->
@@ -509,7 +574,7 @@
       pointer-events: none;
       user-select: none;
     ">
-      Versão 0.16.79
+      Versão 0.16.111
     </div>
 
     <div id="toast" style="display:none; position:fixed; bottom:80px; right:24px; background:#222; color:#fff; padding:10px 20px; border-radius:6px; z-index:9999;">Mensagem copiada!</div>

@@ -117,6 +117,10 @@ body {
   max-width: 900px;
 }
 
+.less-bigger-container {
+  max-width: 750px;
+}
+
 .container label,
 .container p {
   display: block;

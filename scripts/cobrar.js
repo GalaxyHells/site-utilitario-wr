@@ -2,9 +2,11 @@ let chavePix = "05.346.003/0001-00"; // Chave padrão
 function setarPix(chave) {
   chavePix = chave;
   // Remove 'clicado' de todos os botões de chave Pix
-  document.querySelectorAll('.btn-pix').forEach(btn => btn.classList.remove('clicado'));
+  document.querySelectorAll('.btn-pix').forEach(btn => {
+    btn.classList.remove('clicado');
+  });
   // Adiciona 'clicado' ao botão pressionado
-  const btn = document.querySelector(`.btn-pix[data-chave="${chave}"]`);
+  const btn = document.querySelector(`.btn-pix[onclick*="${chave}"]`);
   if (btn) btn.classList.add('clicado');
 }
 
@@ -13,9 +15,7 @@ function criarLinha(tipo, idx) {
     <div class="linha-cobrar" data-tipo="${tipo}" data-idx="${idx}">
       <input type="number" min="1" placeholder="Qtd." class="qtd" style="width:60px;">
       <input type="text" placeholder="Valor (R$)" class="valor" style="width:110px;">
-      <span class="doc-tipo tipo-btn clicado" data-tipo="Nota">Nota</span>
-      <span class="doc-tipo tipo-btn" data-tipo="Boleto">Boleto</span>
-      
+      <span class="doc-tipo tipo-btn clicado" data-tipo="${tipo === 'notas' ? 'Nota' : 'Boleto'}">${tipo === 'notas' ? 'Nota' : 'Boleto'}</span>
     </div>
   `;
 
