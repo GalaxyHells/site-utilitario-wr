@@ -268,6 +268,15 @@ const modalAdicionarCeramica = document.getElementById('modalAdicionarCeramica')
 const fecharModalAdicionarCeramicaBtn = document.getElementById('fecharModalAdicionarCeramica');
 const formAdicionarCeramica = document.getElementById('formAdicionarCeramica');
 
+// Dados das cerâmicas mais comuns
+const ceramicasComuns = [
+  { nome: "Savane Plus", metragem: 1.82 },
+  { nome: "Canela", metragem: 2.27 },
+  { nome: "Pratik", metragem: 2.5 },
+  { nome: "Carvalho", metragem: 3.1 },
+  { nome: "HD Madeira", metragem: 2.92 }
+];
+
 // Abrir modal de seleção
 abrirSelecaoCeramicaBtn.onclick = () => {
   modalSelecaoCeramica.style.display = 'flex';
@@ -448,3 +457,34 @@ btnConfirmarExcluir.onclick = async () => {
   idCeramicaParaExcluir = null;
   carregarCeramicas();
 };
+
+// Adicionar evento ao botão
+document.getElementById('abrirSelecaoCeramica').addEventListener('click', function() {
+  // Limpa botões existentes
+  const container = document.getElementById('opcoesCeramica');
+  container.innerHTML = '';
+
+  // Cria um botão para cada cerâmica comum
+  ceramicasComuns.forEach(ceramica => {
+    const btn = document.createElement('button');
+    btn.className = 'primary small-button';
+    btn.textContent = `${ceramica.nome} (${ceramica.metragem}m²)`;
+    btn.onclick = () => selecionarMetragem(ceramica.metragem);
+    container.appendChild(btn);
+  });
+});
+
+function selecionarMetragem(metragem) {
+  // Remove classe 'clicado' de todos os botões
+  document.querySelectorAll('#opcoesCeramica button').forEach(btn => {
+    btn.classList.remove('clicado');
+  });
+
+  // Adiciona classe 'clicado' ao botão atual
+  const botoes = document.querySelectorAll('#opcoesCeramica button');
+  const botaoAtual = Array.from(botoes).find(btn => btn.textContent.includes(metragem));
+  if (botaoAtual) botaoAtual.classList.add('clicado');
+
+  // Atualiza o cálculo
+  // ... seu código existente de cálculo
+}

@@ -177,147 +177,87 @@
     <!-- ==================================================================================== -->
 
     <!-- Ferramenta 2: Calculadora de Cerâmica -->
-    <div id="ferramenta2" class="container ferramenta">
-    <!-- <section class="ferramenta-section"> -->
-      <h2 class="ferramenta-title"><i class="fas fa-th-large"></i> Calculadora de Cerâmica</h2>
-      <button id="resetarCeramica" class=" secondary" style="position: absolute; top: 24px; right: 32px;">Resetar</button>
+    <div id="ferramenta2" class="container ferramenta bigger-container">
+      <h2><i class="fas fa-th-large"></i> Calculadora de Cerâmica</h2>
+      
+      <button id="resetarCeramica" class="secondary" style="position: absolute; top: 24px; right: 32px;">
+        <i class="fas fa-redo"></i> Resetar
+      </button>
 
-      <!-- [1] Inserir metragem desejada-->
-      <section class="etapa-ceramica-desejado">
-        <hr class="divisor-etapa">
-        <p class="etapa-titulo">Quantos metros/caixas o cliente quer?</p>
-        <div class="campo-metros-calc">
-          <input type="number" id="metrosDesejados" step="0.01" placeholder="Quantidade" />
-          <button type="button" class="primary clicado small-button" id="desejaMetros">Metros</button>
-          <button type="button" class="primary small-button" id="desejaCaixas">Caixas</button>
-          <span class="vertical-divider"></span>
-          <input type="number" id="largura" placeholder="Larg" step="0.01" />
-          <input type="number" id="comprimento" placeholder="Comp" step="0.01" />
-          <button type="button" class="primary small-button" id="calcularMetroQuadrado">Calcular</button>
-        </div>
-      </section>
+      <div class="colunas-ceramica">
+        <!-- Coluna Esquerda: Entrada de dados -->
+        <div class="coluna-ceramica">
+          <h3 class="coluna-titulo"><i class="fas fa-calculator"></i> Cálculo</h3>
 
-      <!-- [2] Selecionar metragem por caixa -->
-      <section class="etapa-ceramica-metros">
-        <hr class="divisor-etapa">
-        <p class="etapa-titulo">Selecione a metragem por caixa:</p>
-        <div id="opcoesCeramica" class="flex-wrap-center">
-          <button class="secondary" onclick="selecionarCeramica(1.45)">1,45 m²</button>
-          <button class="secondary" onclick="selecionarCeramica(1.92)">1,92 m²</button>
-          <button class="secondary" onclick="selecionarCeramica(2.10)">2,10 m²</button>
-          <button class="secondary" onclick="selecionarCeramica(2.18)">2,18 m²</button>
-          <button class="secondary" onclick="selecionarCeramica(2.23)">2,23 m²</button>
-          <button class="secondary" onclick="selecionarCeramica(2.27)">2,27 m²</button>
-          <button class="secondary" onclick="selecionarCeramica(2.30)">2,30 m²</button>
-          <button class="secondary" onclick="selecionarCeramica(2.50)">2,50 m²</button>
-          <button class="secondary" onclick="selecionarCeramica(2.52)">2,52 m²</button>
-        </div>
-        <button id="abrirSelecaoCeramica" class="primary" style="margin-top: 1rem;">Selecionar cerâmica da lista</button>
-
-        <!-- Modal de seleção de cerâmica -->
-        <div id="modalSelecaoCeramica" class="modal-bg" style="display:none;">
-          <div class="modal-flutuante">
-            <h3>Selecione uma cerâmica</h3>
-            <div id="listaCeramicasCards" class="catalogo-grid-ceramica">
-              <!-- Cards de cerâmica serão carregados aqui via JS -->
-              <div class="card-ceramica adicionar-nova" id="abrirAdicionarCeramica">
-                <div class="plus">+</div>
-                <div>Adicionar nova cerâmica</div>
-              </div>
+          <div class="secao-ceramica">
+            <label class="secao-titulo">
+              <i class="fas fa-ruler"></i> Metragem Desejada
+            </label>
+            <div class="campo-metros-calc">
+              <input type="number" id="metrosDesejados" step="0.01" placeholder="Quantidade" />
+              <button type="button" class="primary clicado small-button" id="desejaMetros">Metros</button>
+              <button type="button" class="primary small-button" id="desejaCaixas">Caixas</button>
             </div>
-            <button class="primary" id="fecharModalCeramica" style="margin-top:1rem;">Fechar</button>
 
-            <!-- Popup de exclusão de cerâmica -->
-            <div id="popupExcluirCeramica" class="popup-excluir-ceramica" style="display:none;">
-              <div class="popup-excluir-conteudo">
-                <p id="textoExcluirCeramica"></p>
-                <div style="display:flex; gap:1rem; justify-content:center; margin-top:1rem;">
-                  <button id="confirmarExcluirCeramica" class="primary" style="background:#c00;color:#fff;">Excluir</button>
-                  <button id="cancelarExcluirCeramica" class="">Cancelar</button>
-                </div>
-              </div>
+            <div class="campo-dimensoes">
+              <input type="number" id="largura" placeholder="Largura" step="0.01" />
+              <span>x</span>
+              <input type="number" id="comprimento" placeholder="Comprimento" step="0.01" />
+              <button type="button" class="primary small-button" id="calcularMetroQuadrado">
+                <i class="fas fa-calculator"></i> Calcular
+              </button>
             </div>
           </div>
-        </div>
 
-        <!-- Modal de adicionar nova cerâmica -->
-        <div id="modalAdicionarCeramica" class="modal-bg" style="display:none;">
-          <div class="modal-flutuante">
-            <h3 style="text-align:center;">Adicionar nova cerâmica</h3>
-            <form id="formAdicionarCeramica">
-              <div style="display:flex; gap:1rem;">
-                <div style="flex:2;">
-                  <label>Nome:</label>
-                  <input type="text" id="nomeNovaCeramica" required>
-                </div>
-                <div style="flex:1;">
-                  <label>Valor (opcional):</label>
-                  <input type="text" id="valorNovaCeramica">
-                </div>
-              </div>
-              <div style="display:flex; gap:1rem;">
-                <div style="flex:1;">
-                  <label>Metragem por caixa (m²):</label>
-                  <input type="number" id="metragemCaixaNovaCeramica" step="0.01" required>
-                </div>
-                <div style="flex:1;">
-                  <label>Tamanho do piso (ex: 57x57):</label>
-                  <input type="text" id="tamanhoPisoNovaCeramica" placeholder="Ex: 57x57">
-                </div>
-              </div>
-              <div style="margin: 1rem 0;">
-                <label>Foto:</label>
-                <input type="file" id="fotoNovaCeramica" accept="image/*">
-              </div>
-              <label>Tipo de lugar indicado:</label>
-              <div class="checkboxes-lugares">
-                <label><input type="checkbox" value="banheiro chao"> Banheiro Chão</label>
-                <label><input type="checkbox" value="banheiro parede"> Banheiro Parede</label>
-                <label><input type="checkbox" value="cozinha chao"> Cozinha Chão</label>
-                <label><input type="checkbox" value="cozinha parede"> Cozinha Parede</label>
-                <label><input type="checkbox" value="calcada"> Calçada</label>
-                <label><input type="checkbox" value="muro"> Muro</label>
-              </div>
-              <div style="display:flex; gap:1rem; justify-content:center; margin-top:1rem;">
-                <button type="submit" class="">Salvar</button>
-                <button type="button" class="" id="fecharModalAdicionarCeramica">Cancelar</button>
-              </div>
-            </form>
+          <div class="secao-ceramica">
+            <label class="secao-titulo">
+              <i class="fas fa-box"></i> Metragem por Caixa
+            </label>
+            <div id="opcoesCeramica" class="grid-opcoes-ceramica">
+              <!-- Botões de metragem -->
+            </div>
+            <button id="abrirSelecaoCeramica" class="primary" style="margin-top: 1rem;">
+              <i class="fas fa-list"></i> Selecionar da Lista
+            </button>
           </div>
         </div>
-      </section>
 
-      <!-- [3] Selecionar metragem sugerida -->
-      <section class="etapa-ceramica-metragem">
-        <hr class="divisor-etapa">
-        <div id="resultadoCeramica" style="text-align: center; margin-top: 2rem; display: none;">
-          <p id="caixasCalculadas"></p>
-          <div style="display: flex; justify-content: center; gap: 1rem;">
-            <button class="primary" id="botaoParaBaixo"></button>
-            <button class="primary" id="botaoParaCima"></button>
+        <!-- Coluna Direita: Resultados -->
+        <div class="coluna-ceramica">
+          <h3 class="coluna-titulo"><i class="fas fa-clipboard-list"></i> Resultado</h3>
+
+          <div id="resultadoCeramica" class="secao-ceramica resultado-box">
+            <p id="caixasCalculadas" class="resultado-texto"></p>
+            <div class="botoes-ajuste">
+              <button class="primary" id="botaoParaBaixo">
+                <i class="fas fa-minus"></i> Diminuir
+              </button>
+              <button class="primary" id="botaoParaCima">
+                <i class="fas fa-plus"></i> Aumentar
+              </button>
+            </div>
+          </div>
+
+          <div class="secao-ceramica">
+            <label class="secao-titulo" id="tituloArgamassa">
+              <i class="fas fa-paste"></i> Argamassa
+            </label>
+            <div id="opcoesArgamassa" class="grid-opcoes-materiais">
+              <!-- Opções de argamassa -->
+            </div>
+          </div>
+
+          <div class="secao-ceramica">
+            <label class="secao-titulo" id="tituloRejunte">
+              <i class="fas fa-brush"></i> Rejunte
+            </label>
+            <div id="opcoesRejunte" class="grid-opcoes-materiais">
+              <!-- Opções de rejunte -->
+            </div>
           </div>
         </div>
-      </section>
-
-      <!-- [4] Selecionar quantidade argamassa -->
-      <section class="etapa-ceramica-argamassa">
-        <hr class="divisor-etapa">
-        <p id="tituloArgamassa" class="etapa-titulo" style="display: none;">Selecione a quantidade de argamassa:</p>
-        <div id="opcoesArgamassa" class="flex-wrap-center" style="display: none; flex-wrap: wrap; gap: 0.5rem; justify-content: center;">
-          <!-- Botões serão criados pelo JavaScript -->
-        </div>
-      </section>
-
-      <!-- Selecionar quantidade rejunte -->
-      <section class="etapa-ceramica-rejunnte">
-        <hr class="divisor-etapa">
-        <p id="tituloRejunte" class="etapa-titulo" style="display: none;">Selecione a quantidade de rejunte:</p>
-        <div id="opcoesRejunte" class="flex-wrap-center" style="display: none; flex-wrap: wrap; gap: 0.5rem; justify-content: center;">
-          <!-- Botões serão criados pelo JavaScript -->
-        </div>
-      </section>
-    <!-- </section> -->
-  </div>
+      </div>
+    </div>
 
     <!-- ==================================================================================== -->
 
@@ -560,6 +500,48 @@
 
     <!-- ==================================================================================== -->
 
+    <!-- Modal de Seleção de Cerâmica -->
+    <div id="modalSelecaoCeramica" class="modal-bg" style="display:none;">
+      <div class="modal-flutuante">
+        <h3 style="margin-bottom:1rem;">Selecionar Cerâmica</h3>
+        <div id="listaCeramicasCards" class="catalogo-grid-ceramica">
+          <!-- Cards serão inseridos aqui -->
+        </div>
+        <button id="fecharModalCeramica" class="secondary" style="position:absolute; top:1rem; right:1rem;">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Modal de Adicionar Cerâmica -->
+    <div id="modalAdicionarCeramica" class="modal-bg" style="display:none;">
+      <div class="modal-flutuante">
+        <h3 style="margin-bottom:1rem;">Adicionar Nova Cerâmica</h3>
+        <form id="formAdicionarCeramica">
+          <input type="text" id="nomeNovaCeramica" placeholder="Nome da cerâmica" required>
+          <input type="text" id="valorNovaCeramica" placeholder="Valor (opcional)">
+          <input type="number" id="metragemCaixaNovaCeramica" placeholder="Metros² por caixa" step="0.01" required>
+          <input type="text" id="tamanhoPisoNovaCeramica" placeholder="Tamanho (opcional, ex: 60x60)">
+          <input type="file" id="fotoNovaCeramica" accept="image/*">
+          <button type="submit" class="primary">Salvar</button>
+        </form>
+        <button id="fecharModalAdicionarCeramica" class="secondary" style="position:absolute; top:1rem; right:1rem;">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Popup de confirmação para excluir -->
+    <div id="popupExcluirCeramica" class="modal-bg" style="display:none;">
+      <div class="popup-excluir-ceramica">
+        <div class="popup-excluir-conteudo">
+          <p id="textoExcluirCeramica"></p>
+          <button id="confirmarExcluirCeramica" class="primary">Confirmar</button>
+          <button id="cancelarExcluirCeramica" class="secondary">Cancelar</button>
+        </div>
+      </div>
+    </div>
+
     <div style="
       position: fixed;
       right: 18px;
@@ -574,7 +556,7 @@
       pointer-events: none;
       user-select: none;
     ">
-      Versão 0.16.111
+      Versão 0.16.123
     </div>
 
     <div id="toast" style="display:none; position:fixed; bottom:80px; right:24px; background:#222; color:#fff; padding:10px 20px; border-radius:6px; z-index:9999;">Mensagem copiada!</div>
