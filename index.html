@@ -195,14 +195,17 @@
             </label>
             <div class="campo-metros-calc">
               <input type="number" id="metrosDesejados" step="0.01" placeholder="Quantidade" />
-              <button type="button" class="primary clicado small-button" id="desejaMetros">Metros</button>
-              <button type="button" class="primary small-button" id="desejaCaixas">Caixas</button>
+              <button type="button" class="primary small-button" id="toggleUnidade">
+                <i class="fas fa-sync"></i> Metros
+              </button>
             </div>
 
             <div class="campo-dimensoes">
-              <input type="number" id="largura" placeholder="Largura" step="0.01" />
-              <span>x</span>
-              <input type="number" id="comprimento" placeholder="Comprimento" step="0.01" />
+              <div class="inputs-dimensao">
+                <input type="number" id="largura" placeholder="Larg." step="0.01" />
+                <span>x</span>
+                <input type="number" id="comprimento" placeholder="Comp." step="0.01" />
+              </div>
               <button type="button" class="primary small-button" id="calcularMetroQuadrado">
                 <i class="fas fa-calculator"></i> Calcular
               </button>
@@ -214,7 +217,15 @@
               <i class="fas fa-box"></i> Metragem por Caixa
             </label>
             <div id="opcoesCeramica" class="grid-opcoes-ceramica">
-              <!-- Botões de metragem -->
+              <button type="button" class="primary small-button" onclick="selecionarMetragem(1.45)">1,45 m²</button>
+              <button type="button" class="primary small-button" onclick="selecionarMetragem(1.92)">1,92 m²</button>
+              <button type="button" class="primary small-button" onclick="selecionarMetragem(2.10)">2,10 m²</button>
+              <button type="button" class="primary small-button" onclick="selecionarMetragem(2.18)">2,18 m²</button>
+              <button type="button" class="primary small-button" onclick="selecionarMetragem(2.23)">2,23 m²</button>
+              <button type="button" class="primary small-button" onclick="selecionarMetragem(2.27)">2,27 m²</button>
+              <button type="button" class="primary small-button" onclick="selecionarMetragem(2.30)">2,30 m²</button>
+              <button type="button" class="primary small-button" onclick="selecionarMetragem(2.50)">2,50 m²</button>
+              <button type="button" class="primary small-button" onclick="selecionarMetragem(2.52)">2,52 m²</button>
             </div>
             <button id="abrirSelecaoCeramica" class="primary" style="margin-top: 1rem;">
               <i class="fas fa-list"></i> Selecionar da Lista
@@ -507,6 +518,9 @@
         <div id="listaCeramicasCards" class="catalogo-grid-ceramica">
           <!-- Cards serão inseridos aqui -->
         </div>
+        <button id="abrirAdicionarCeramica" class="secondary" style="margin-top:1rem;">
+          <i class="fas fa-plus"></i> Nova Cerâmica
+        </button>
         <button id="fecharModalCeramica" class="secondary" style="position:absolute; top:1rem; right:1rem;">
           <i class="fas fa-times"></i>
         </button>
@@ -556,7 +570,7 @@
       pointer-events: none;
       user-select: none;
     ">
-      Versão 0.16.123
+      Versão 0.18.104
     </div>
 
     <div id="toast" style="display:none; position:fixed; bottom:80px; right:24px; background:#222; color:#fff; padding:10px 20px; border-radius:6px; z-index:9999;">Mensagem copiada!</div>

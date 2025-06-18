@@ -1,9 +1,25 @@
 let metrosSelecionados = null;  // Variável para armazenar a quantidade de metros selecionados
 let jaConvertidoParaMetros = false;
+let unidadeAtual = 'metros'; // controle do estado atual
+
+document.getElementById('toggleUnidade').addEventListener('click', function() {
+  const btn = this;
+  
+  if (unidadeAtual === 'metros') {
+    unidadeAtual = 'caixas';
+    btn.innerHTML = '<i class="fas fa-sync"></i> Caixas';
+  } else {
+    unidadeAtual = 'metros';
+    btn.innerHTML = '<i class="fas fa-sync"></i> Metros';
+  }
+  
+  // Mantém o estado para usar na função de cálculo
+  jaConvertidoParaMetros = false;
+});
 
 function selecionarCeramica(metrosPorCaixa) {
   let metrosDesejados = parseFloat(document.getElementById("metrosDesejados").value);
-  const estaEmCaixas = document.getElementById("desejaCaixas").classList.contains("clicado");
+  const estaEmCaixas = unidadeAtual === 'caixas';
 
   if (isNaN(metrosDesejados) || metrosDesejados <= 0) {
     alert(`Digite a quantidade de ${estaEmCaixas ? 'caixas' : 'metros'} que o cliente deseja.`);
@@ -185,15 +201,15 @@ document.getElementById('calcularMetroQuadrado').onclick = function() {
   }
 };
 
-document.getElementById('desejaMetros').addEventListener('click', function() {
-  this.classList.add('clicado');
-  document.getElementById('desejaCaixas').classList.remove('clicado');
-});
+// document.getElementById('desejaMetros').addEventListener('click', function() {
+//   this.classList.add('clicado');
+//   document.getElementById('desejaCaixas').classList.remove('clicado');
+// });
 
-document.getElementById('desejaCaixas').addEventListener('click', function() {
-  this.classList.add('clicado');
-  document.getElementById('desejaMetros').classList.remove('clicado');
-});
+// document.getElementById('desejaCaixas').addEventListener('click', function() {
+//   this.classList.add('clicado');
+//   document.getElementById('desejaMetros').classList.remove('clicado');
+// });
 
 document.getElementById('resetarCeramica').addEventListener('click', function() {
   // Limpa campos
@@ -355,7 +371,7 @@ async function carregarCeramicas() {
       : "../images/image-placeholder.webp"; // Placeholder se não houver foto
     card.innerHTML = `
       <button class="excluir-ceramica-btn" title="Excluir cerâmica">&times;</button>
-      <div class="nome">${ceramica.nome}</div>
+      <div class="nome" tabindex="0">${ceramica.nome}</div>
       <img src="${foto}" alt="Foto da cerâmica" />
       <div class="info">
         <div class="metragem">${ceramica.metragemCaixa.toLocaleString('pt-BR', {minimumFractionDigits:2})} m²/caixa</div>
@@ -363,7 +379,10 @@ async function carregarCeramicas() {
         ${ceramica.valor ? `<div class="valor">${ceramica.valor}</div>` : ''}
         ${ceramica.lugares && ceramica.lugares.length ? `<div class="lugares">${ceramica.lugares.join(', ')}</div>` : ''}
       </div>
-      <button class="selecionar-ceramica" data-metragem="${ceramica.metragemCaixa}">Selecionar</button>
+      <div style="display:flex;gap:0.5rem;justify-content:center;">
+        <button class="selecionar-ceramica" data-metragem="${ceramica.metragemCaixa}">Selecionar</button>
+        <button class="editar-ceramica-btn" title="Editar cerâmica"><i class="fas fa-pen"></i></button>
+      </div>
     `;
     // Botão excluir
     card.querySelector('.excluir-ceramica-btn').onclick = (ev) => {
@@ -373,6 +392,10 @@ async function carregarCeramicas() {
     card.querySelector('.selecionar-ceramica').onclick = () => {
       selecionarCeramicaViaCard(ceramica.metragemCaixa);
       modalSelecaoCeramica.style.display = 'none';
+    };
+    // Botão editar
+    card.querySelector('.editar-ceramica-btn').onclick = () => {
+      ativarEdicaoInline(card, key, ceramica);
     };
     listaCeramicasCards.appendChild(card);
   });
@@ -458,33 +481,145 @@ btnConfirmarExcluir.onclick = async () => {
   carregarCeramicas();
 };
 
-// Adicionar evento ao botão
-document.getElementById('abrirSelecaoCeramica').addEventListener('click', function() {
-  // Limpa botões existentes
-  const container = document.getElementById('opcoesCeramica');
-  container.innerHTML = '';
-
-  // Cria um botão para cada cerâmica comum
-  ceramicasComuns.forEach(ceramica => {
-    const btn = document.createElement('button');
-    btn.className = 'primary small-button';
-    btn.textContent = `${ceramica.nome} (${ceramica.metragem}m²)`;
-    btn.onclick = () => selecionarMetragem(ceramica.metragem);
-    container.appendChild(btn);
+document.addEventListener('DOMContentLoaded', function() {
+  // Adicionar evento ao botão
+  document.getElementById('abrirSelecaoCeramica').addEventListener('click', function() {
+    document.getElementById('modalSelecaoCeramica').style.display = 'flex';
+    carregarCeramicas(); // Essa função só mexe em #listaCeramicasCards
   });
+
+  // Remova eventos antigos dos botões que não existem mais
+  // const btnMetros = document.getElementById('desejaMetros');
+  // const btnCaixas = document.getElementById('desejaCaixas');
+
+  // Inicialização da unidade
+  let unidadeAtual = 'metros';
+  const toggleUnidade = document.getElementById('toggleUnidade');
+  
+  function atualizarCalculo() {
+      const entrada = parseFloat(document.getElementById('metrosDesejados').value) || 0;
+      if (!metrosSelecionados) return;
+
+      let resultado;
+      if (unidadeAtual === 'metros') {
+          resultado = Math.ceil(entrada / metrosSelecionados);
+      } else {
+          resultado = (entrada * metrosSelecionados).toFixed(2);
+      }
+
+      document.getElementById('caixasCalculadas').innerText = 
+          unidadeAtual === 'metros' ? 
+          `${resultado} caixas para ${entrada}m²` :
+          `${resultado}m² em ${entrada} caixas`;
+  }
+
+  // Novo evento para o toggle
+  if (toggleUnidade) {
+      toggleUnidade.addEventListener('click', function() {
+          if (unidadeAtual === 'metros') {
+              unidadeAtual = 'caixas';
+              this.innerHTML = '<i class="fas fa-sync"></i> Caixas';
+          } else {
+              unidadeAtual = 'metros';
+              this.innerHTML = '<i class="fas fa-sync"></i> Metros';
+          }
+          atualizarCalculo();
+      });
+  }
+
+  // Atualizar evento do input
+  const inputMetros = document.getElementById('metrosDesejados');
+  if (inputMetros) {
+      inputMetros.addEventListener('input', atualizarCalculo);
+  }
 });
 
-function selecionarMetragem(metragem) {
+
+function selecionarMetragem(metros) {
   // Remove classe 'clicado' de todos os botões
-  document.querySelectorAll('#opcoesCeramica button').forEach(btn => {
+  document.querySelectorAll('.grid-opcoes-ceramica button').forEach(btn => {
     btn.classList.remove('clicado');
   });
 
   // Adiciona classe 'clicado' ao botão atual
-  const botoes = document.querySelectorAll('#opcoesCeramica button');
-  const botaoAtual = Array.from(botoes).find(btn => btn.textContent.includes(metragem));
+  const botoes = document.querySelectorAll('.grid-opcoes-ceramica button');
+  const botaoAtual = Array.from(botoes).find(btn => 
+    btn.textContent.includes(metros.toString().replace('.', ','))
+  );
   if (botaoAtual) botaoAtual.classList.add('clicado');
 
-  // Atualiza o cálculo
-  // ... seu código existente de cálculo
+  // Atualiza a metragem selecionada e recalcula
+  metrosSelecionados = metros;
+  calcularCaixas();
+}
+
+function ativarEdicaoInline(card, key, ceramica) {
+  // Campos editáveis
+  const campos = [
+    { seletor: '.nome', prop: 'nome', tipo: 'text' },
+    { seletor: '.metragem', prop: 'metragemCaixa', tipo: 'number' },
+    { seletor: '.tamanho-piso', prop: 'tamanhoPiso', tipo: 'text' },
+    { seletor: '.valor', prop: 'valor', tipo: 'text' }
+  ];
+
+  campos.forEach(({ seletor, prop, tipo }) => {
+    const el = card.querySelector(seletor);
+    if (el) {
+      // Pega valor atual
+      let valorAtual = el.innerText.replace(' m²/caixa','');
+      // Cria input
+      const input = document.createElement('input');
+      input.type = tipo;
+      input.value = valorAtual;
+      input.style.width = (valorAtual.length + 2) + 'ch';
+      input.className = 'input-edicao-inline';
+      input.setAttribute('data-prop', prop); // Adiciona o atributo data-prop
+      el.replaceWith(input);
+      input.focus();
+
+      // Salva ao pressionar Enter ou sair do campo
+      input.addEventListener('keydown', async (e) => {
+        if (e.key === 'Enter') {
+          await salvarEdicaoInline(card, key, campos);
+        }
+      });
+      input.addEventListener('blur', async () => {
+        await salvarEdicaoInline(card, key, campos);
+      });
+    }
+  });
+}
+
+async function salvarEdicaoInline(card, key, campos) {
+  const db = firebase.database();
+  const updates = {};
+  let erro = false;
+
+  campos.forEach(({ seletor, prop, tipo }) => {
+    // Pegue o input correto para cada campo
+    const input = card.querySelector(`input.input-edicao-inline[data-prop="${prop}"]`);
+    if (input) {
+      let valor = input.value;
+      if (tipo === 'number') {
+        valor = parseFloat(valor.replace(',', '.'));
+        if (isNaN(valor) || valor <= 0) {
+          erro = true;
+          input.classList.add('erro-edicao');
+        } else {
+          input.classList.remove('erro-edicao');
+        }
+      }
+      updates[prop] = valor;
+    }
+  });
+
+  if (erro) {
+    alert('Digite um valor numérico válido e maior que zero para a metragem!');
+    return;
+  }
+
+  if (Object.keys(updates).length) {
+    await db.ref('ceramicas/' + key).update(updates);
+    await carregarCeramicas();
+  }
 }

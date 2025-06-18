@@ -47,7 +47,7 @@ function aplicarMascaraMoeda(input) {
 function adicionarLinha(tipo) {
   const idx = linhas[tipo].length;
   linhas[tipo].push({ tipoDoc: "Nota", qtd: "", valor: "" });
-  document.getElementById(tipo + '-lista').insertAdjacentHTML('beforeend', criarLinha(tipo, idx));
+  // document.getElementById(tipo + '-lista').insertAdjacentHTML('beforeend', criarLinha(tipo, idx));
   atualizarEventosLinha(tipo, idx);
 }
 

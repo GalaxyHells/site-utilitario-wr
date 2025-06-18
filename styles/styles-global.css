@@ -113,6 +113,11 @@ body {
   /* margin-top: 120px; */
 }
 
+.even-bigger-container {
+  max-width: 1050px;
+  min-width: 1050px;
+}
+
 .bigger-container {
   max-width: 900px;
 }
@@ -322,7 +327,7 @@ button:disabled {
 
 .ferramentas-wrapper {
   width: 100%;
-  max-width: 900px;
+  max-width: 1200px;
   padding: 0;
   display: flex;
   flex-direction: column;
