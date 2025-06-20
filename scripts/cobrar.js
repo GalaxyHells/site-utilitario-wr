@@ -25,11 +25,15 @@ function criarLinha(tipo, idx) {
 let linhas = { vencidas: [], hoje: [], sete: [] };
 
 function formatarMoeda(valor) {
+  // Remove tudo que não for número
   valor = valor.replace(/\D/g, "");
   if (!valor) return "";
+  // Divide por 100 para ter os centavos
   valor = (parseInt(valor, 10) / 100).toFixed(2) + "";
+  // Troca ponto por vírgula para centavos
   valor = valor.replace(".", ",");
-  valor = valor.replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
+  // Adiciona pontos de milhar
+  valor = valor.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
   return "R$ " + valor;
 }
 
@@ -40,8 +44,22 @@ function aplicarMascaraMoeda(input) {
       input.value = "";
       return;
     }
-    input.value = formatarMoeda(val);
+    val = (parseInt(val, 10) / 100).toFixed(2);
+    val = val.replace(".", ",");
+    val = val.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+    input.value = "R$ " + val;
   });
+
+  // Aplica a máscara ao carregar o valor inicial
+  if (input.value) {
+    let val = input.value.replace(/\D/g, "");
+    if (val) {
+      val = (parseInt(val, 10) / 100).toFixed(2);
+      val = val.replace(".", ",");
+      val = val.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+      input.value = "R$ " + val;
+    }
+  }
 }
 
 function adicionarLinha(tipo) {
@@ -105,34 +123,39 @@ function gerarMensagem() {
 
   let mensagem = `*${saudacao},*\n\nDetectamos pendências em seu cadastro:\n`;
   let temBoleto = false;
-  let boletoVencidoOuHoje = false;
 
-  ['vencidas','hoje','sete'].forEach(tipo => {
-    linhas[tipo].forEach(linha => {
-      if (linha && linha.qtd && linha.valor) {
-        let desc = tipo === 'vencidas' ? 'vencida(s)' : tipo === 'hoje' ? 'vencendo hoje' : 'vencendo nos próximos 7 dias';
-        const qtdNum = parseInt(linha.qtd, 10);
+  // Para cada coluna (Notas e Boletos)
+  document.querySelectorAll('.coluna-cobranca').forEach(coluna => {
+    const tipoDoc = coluna.querySelector('.coluna-titulo i').classList.contains('fa-file-invoice') ? 'Nota' : 'Boleto';
+
+    coluna.querySelectorAll('.secao-cobranca').forEach(secao => {
+      let desc = '';
+      if (secao.querySelector('.secao-titulo i.fa-clock-rotate-left')) desc = 'vencida(s)';
+      else if (secao.querySelector('.secao-titulo i.fa-calendar-day')) desc = 'vencendo hoje';
+      else if (secao.querySelector('.secao-titulo i.fa-calendar-week')) desc = 'vencendo nos próximos 7 dias';
+
+      const qtdInput = secao.querySelector('.linha-cobrar .qtd');
+      const valorInput = secao.querySelector('.linha-cobrar .valor');
+      const qtd = qtdInput ? qtdInput.value : '';
+      const valor = valorInput ? valorInput.value : '';
+
+      if (qtd && valor) {
+        const qtdNum = parseInt(qtd, 10);
         const valorTexto = qtdNum > 1 ? "no valor total de" : "no valor de";
-        mensagem += `*${linha.qtd}* ${linha.tipoDoc.toLowerCase()}(s) ${desc}, ${valorTexto} *${linha.valor}*.\n`;
+        mensagem += `*${qtd}* ${tipoDoc.toLowerCase()}(s) ${desc}, ${valorTexto} *${valor}*.\n`;
 
-        if (linha.tipoDoc === "Boleto") {
+        if (tipoDoc === "Boleto") {
           temBoleto = true;
-          if (tipo === "vencidas" || tipo === "hoje") {
-            boletoVencidoOuHoje = true;
-          }
         }
       }
     });
   });
 
   if (temBoleto) {
-    mensagem += `\n*IMPORTANTE:* Boletos devem ser pagos no aplicativo do banco, papelarias ou locais que aceitam pagamento de boletos. Não é possível pagar boletos na loja ou via Pix.\n`;
+    mensagem += `\n*IMPORTANTE:* Boletos devem ser pagos no aplicativo do banco, papelarias, mercados ou locais que aceitam pagamento de boletos. Não é possível pagar boletos na loja ou via Pix.\n`;
+    mensagem += `\n*ATENÇÃO:* Boletos podem ser protestados e gerar negativação do nome após 5 dias do vencimento.\n`;
   } else {
     mensagem += `\nCaso deseje, pode realizar o pagamento via Pix utilizando a chave: *${chavePix}*\n`;
-  }
-
-  if (boletoVencidoOuHoje) {
-    mensagem += "\n*ATENÇÃO:* Boletos podem ser protestados e gerar negativação do nome após 5 dias do vencimento.\n";
   }
 
   mensagem += "\nAtenciosamente,\n*WR - Materiais para Construção*\n\n_Esta é uma mensagem automática. Em caso de dúvidas, entre em contato conosco._";
@@ -178,4 +201,10 @@ document.getElementById('resetarCobrar').addEventListener('click', function() {
 
   // Limpa a mensagem gerada
   document.getElementById('mensagem').value = '';
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.linha-cobrar .valor').forEach(input => {
+    aplicarMascaraMoeda(input);
+  });
 });

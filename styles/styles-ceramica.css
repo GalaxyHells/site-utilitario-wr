@@ -339,3 +339,9 @@ p {
   padding: 2px 6px;
   outline: none;
 }
+.card-ceramica .nome,
+.card-ceramica .metragem,
+.card-ceramica .tamanho-piso,
+.card-ceramica .valor {
+  cursor: pointer;
+}

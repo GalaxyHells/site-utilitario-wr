@@ -91,11 +91,14 @@ textarea#mensagem:focus {
 
 .campo-mensagem {
   margin-top: 1.5rem;
+  width: 600px;
+  min-height: 400px;
 }
 
 .campo-mensagem textarea {
   width: 100%;
-  min-height: 120px;
+  height: 100%;
+  /* min-height: 2000px; */
   padding: 1rem;
   border-radius: 8px;
   border: 1px solid var(--border-color);
