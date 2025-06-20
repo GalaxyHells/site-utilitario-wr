@@ -345,3 +345,16 @@ p {
 .card-ceramica .valor {
   cursor: pointer;
 }
+.btn-calc {
+  text-align: center;
+  line-height: 1.2;
+  padding: 8px 12px;
+}
+.btn-calc-qtd {
+  font-weight: bold;
+  font-size: 1.1em;
+}
+.btn-calc-tipo {
+  font-size: 0.95em;
+  color: #888;
+}

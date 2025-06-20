@@ -132,6 +132,7 @@ function calcularArgamassa(metros) {
       document.querySelectorAll("#opcoesArgamassa button").forEach(btn => btn.classList.remove("clicado"));
       button.classList.add("clicado");
     });
+    button.innerHTML = `<span class="btn-calc-qtd">${sacos} sacos</span><br><span class="btn-calc-tipo">(${opcao.nome})</span>`;
     container.appendChild(button);
   });
 }
@@ -203,3 +204,12 @@ document.getElementById('resetarCeramica').addEventListener('click', function() 
 document.getElementById('metrosDesejados').addEventListener('input', function() {
   if (metrosSelecionados) calcularCaixas();
 });
+
+function criarBotaoCalc(qtd, tipo) {
+  return `
+    <button class="btn-calc">
+      <span class="btn-calc-qtd">${qtd}</span><br>
+      <span class="btn-calc-tipo">(${tipo})</span>
+    </button>
+  `;
+}

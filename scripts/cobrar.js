@@ -115,6 +115,9 @@ function atualizarEventosLinha(tipo, idx) {
   }
 });
 
+// Ative ou desative o resumo de notas aqui:
+const RESUMO_TOTAL_NOTAS = true;
+
 // Ao gerar mensagem:
 function gerarMensagem() {
   // Saudação dinâmica
@@ -123,6 +126,10 @@ function gerarMensagem() {
 
   let mensagem = `*${saudacao},*\n\nDetectamos pendências em seu cadastro:\n`;
   let temBoleto = false;
+
+  // Variáveis para totalização de notas
+  let totalNotas = 0;
+  let qtdNotas = 0;
 
   // Para cada coluna (Notas e Boletos)
   document.querySelectorAll('.coluna-cobranca').forEach(coluna => {
@@ -141,15 +148,24 @@ function gerarMensagem() {
 
       if (qtd && valor) {
         const qtdNum = parseInt(qtd, 10);
+        const valorNum = parseFloat(valor.replace(/\D/g, "")) / 100 || 0;
         const valorTexto = qtdNum > 1 ? "no valor total de" : "no valor de";
         mensagem += `*${qtd}* ${tipoDoc.toLowerCase()}(s) ${desc}, ${valorTexto} *${valor}*.\n`;
 
         if (tipoDoc === "Boleto") {
           temBoleto = true;
+        } else if (tipoDoc === "Nota") {
+          qtdNotas += qtdNum;
+          totalNotas += valorNum;
         }
       }
     });
   });
+
+  // Adiciona o resumo das notas, se ativado e houver notas
+  if (RESUMO_TOTAL_NOTAS && qtdNotas > 0) {
+    mensagem += `\nTodas as *${qtdNotas}* notas totalizam *R$ ${totalNotas.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}*.\n`;
+  }
 
   if (temBoleto) {
     mensagem += `\n*IMPORTANTE:* Boletos devem ser pagos no aplicativo do banco, papelarias, mercados ou locais que aceitam pagamento de boletos. Não é possível pagar boletos na loja ou via Pix.\n`;
