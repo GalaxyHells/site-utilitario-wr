@@ -171,34 +171,10 @@ function copiarMensagem() {
 }
 
 document.getElementById('resetarCobrar').addEventListener('click', function() {
-  // Limpa as listas de linhas
-  linhas = { vencidas: [], hoje: [], sete: [] };
-
-  // Remove todas as linhas do DOM
-  ['vencidas', 'hoje', 'sete'].forEach(tipo => {
-    const lista = document.getElementById(`${tipo}-lista`);
-    lista.innerHTML = '';
+  // Limpa todos os inputs de quantidade e valor
+  document.querySelectorAll('#cobrar .linha-cobrar input').forEach(input => {
+    input.value = '';
   });
-
-  // Adiciona as linhas iniciais novamente
-  ['vencidas', 'hoje', 'sete'].forEach(tipo => {
-    adicionarLinha(tipo); // primeira linha (Nota)
-    adicionarLinha(tipo); // segunda linha (Boleto)
-
-    // Marca o botão "Boleto" na segunda linha
-    const idx = 1; // segunda linha tem índice 1
-    const container = document.querySelector(`div[data-tipo="${tipo}"][data-idx="${idx}"]`);
-    if (container) {
-      const btnNota = container.querySelector('.tipo-btn[data-tipo="Nota"]');
-      const btnBoleto = container.querySelector('.tipo-btn[data-tipo="Boleto"]');
-      if (btnNota && btnBoleto) {
-        btnNota.classList.remove('clicado');
-        btnBoleto.classList.add('clicado');
-        linhas[tipo][idx].tipoDoc = "Boleto";
-      }
-    }
-  });
-
   // Limpa a mensagem gerada
   document.getElementById('mensagem').value = '';
 });
