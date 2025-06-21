@@ -124,7 +124,7 @@ function gerarMensagem() {
   const hora = new Date().getHours();
   const saudacao = hora >= 12 && hora < 18 ? "Boa tarde" : "Bom dia";
 
-  let mensagem = `*${saudacao},*\n\nDetectamos pendências em seu cadastro:\n`;
+  let mensagem = `*${saudacao},*\n\nIdentificamos que há pendências em aberto, conforme abaixo:\n`;
   let temBoleto = false;
 
   // Variáveis para totalização de notas
@@ -164,7 +164,7 @@ function gerarMensagem() {
 
   // Adiciona o resumo das notas, se ativado e houver notas
   if (RESUMO_TOTAL_NOTAS && qtdNotas > 0) {
-    mensagem += `\nTodas as *${qtdNotas}* notas totalizam *R$ ${totalNotas.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}*.\n`;
+    mensagem += `\nTodas as *${qtdNotas}* nota(s) totalizam *R$ ${totalNotas.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2})}*.\n`;
   }
 
   if (temBoleto) {
